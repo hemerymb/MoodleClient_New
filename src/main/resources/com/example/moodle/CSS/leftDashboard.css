@@ -1,6 +1,7 @@
 .button {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
+    -fx-background-radius: 10;
 }
 
 .button:hover {
@@ -11,4 +12,9 @@
 .button-menu:focused {
     -fx-background-color: #d2d2d2;
     -fx-border-color: darkorange;
+}
+
+.button-menu {
+    -fx-border-width: 0 5 0 5;
+    -fx-border-radius: 10;
 }
