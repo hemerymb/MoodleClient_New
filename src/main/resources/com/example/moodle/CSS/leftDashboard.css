@@ -1,0 +1,14 @@
+.button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.button:hover {
+    -fx-background-color: #e5e5e5;
+    -fx-border-color: transparent;
+}
+
+.button-menu:focused {
+    -fx-background-color: #d2d2d2;
+    -fx-border-color: darkorange;
+}

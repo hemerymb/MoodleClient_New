@@ -1,0 +1,32 @@
+.menu-button > .arrow-button,
+.menu-button > .arrow-button > .arrow {
+    -fx-padding : 0;
+}
+
+.menu-button {
+    -fx-background-color: #fff0;
+}
+
+.custom-menu-item:focused {
+    -fx-background-color: #e2e2e2;
+    -fx-background-radius: 7px;
+    -fx-cursor: hand;
+}
+
+.profile-custom-menu-item:focused {
+    -fx-background-color: #fff;
+    -fx-cursor: default;
+}
+
+.custom-menu-item:focused .label {
+    -fx-text-fill: black;
+}
+
+.context-menu {
+    -fx-padding: 5px;
+    -fx-background-radius: 10px;
+}
+
+.progress-bar > .track {
+    -fx-control-inner-background: transparent;
+}

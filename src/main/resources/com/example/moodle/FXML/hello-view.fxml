@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.HelloController">
+<StackPane fx:id="stackpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Login.HelloController">
    <children>
       <AnchorPane fx:id="pane0" prefHeight="753.0" prefWidth="1288.0">
          <children>
@@ -19,7 +19,7 @@
                <children>
                   <ImageView fx:id="image1" fitHeight="740.0" fitWidth="811.0" opacity="0.86" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../image/triangles-top.jpg" />
+                        <Image url="@../images/triangles-top.jpg" />
                      </image>
                   </ImageView>
                   <Label fx:id="create" alignment="CENTER" layoutX="220.0" layoutY="74.0" prefHeight="48.0" prefWidth="258.0" text="Create Account" textAlignment="CENTER">
@@ -62,7 +62,7 @@
                         <Font name="Candara Light" size="17.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="ButtonSignUp" layoutX="298.0" layoutY="534.0" prefHeight="31.0" prefWidth="184.0" style="-fx-border-color: Black; -fx-border-radius: 10; -fx-background-color: orange; -fx-background-radius: 10;" text=" SIGN IN" onAction="#handleLoginBtn">
+                  <JFXButton fx:id="ButtonSignUp" layoutX="298.0" layoutY="534.0" onAction="#handleLoginBtn" prefHeight="31.0" prefWidth="184.0" style="-fx-border-color: Black; -fx-border-radius: 10; -fx-background-color: orange; -fx-background-radius: 10;" text=" SIGN IN">
                      <font>
                         <Font name="Candara" size="19.0" />
                      </font>
@@ -72,7 +72,7 @@
                         <Font name="Candara Bold Italic" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="ButtonSignUp1" layoutX="298.0" layoutY="534.0" prefHeight="31.0" prefWidth="184.0" style="-fx-border-color: Black; -fx-border-radius: 10; -fx-background-color: orange; -fx-background-radius: 10;" text=" SIGN UP" onAction="#handleSignUpBtn">
+                  <JFXButton fx:id="ButtonSignUp1" layoutX="298.0" layoutY="534.0" onAction="#handleSignUpBtn" prefHeight="31.0" prefWidth="184.0" style="-fx-border-color: Black; -fx-border-radius: 10; -fx-background-color: orange; -fx-background-radius: 10;" text=" SIGN UP">
                      <font>
                         <Font name="Candara" size="19.0" />
                      </font>

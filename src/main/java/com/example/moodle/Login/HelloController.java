@@ -1,4 +1,4 @@
-package com.example.moodle;
+package com.example.moodle.Login;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
