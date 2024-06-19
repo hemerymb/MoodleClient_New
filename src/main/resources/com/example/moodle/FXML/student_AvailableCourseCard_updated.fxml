@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane style="-fx-cursor: hand; -fx-background-color: transparent;" styleClass="my-btn-class" stylesheets="@../CSS/courseCard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Teacher.CoursesPanel.AvailableCourseCard.AvailableCourseCardController">
+   <children>
+      <VBox style="-fx-background-color: fff; -fx-border-radius: 0 0 10 10; -fx-background-radius: 0 0 10 10;">
+         <children>
+            <ImageView fitHeight="127.0" fitWidth="222.0" pickOnBounds="true" styleClass="course-image">
+               <image>
+                  <Image url="@../images/bg-prlx-big-1.jpg" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <VBox minWidth="200.0">
+               <children>
+                  <Label fx:id="courseName" text="Course 1" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="courseDesc" text="description">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="ChaptersNumber" text="N Chapitres">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="7.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+         <effect>
+            <DropShadow height="15.0" radius="7.0" width="15.0">
+               <color>
+                  <Color opacity="0.800000011920929" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+   </children>
+</Pane>
