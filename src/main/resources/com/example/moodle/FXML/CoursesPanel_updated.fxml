@@ -58,7 +58,7 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <ScrollPane fx:id="scrollpane" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background: transparent; -fx-background-color: fff; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
+                        <ScrollPane fx:id="scrollpane" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background: transparent; -fx-background-color: fff; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
                            <padding>
                               <Insets left="5.0" right="5.0" />
                            </padding>

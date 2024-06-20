@@ -51,8 +51,12 @@ public class LeftDashboardController implements Initializable{
     }
 
     @FXML
-    void handleCalendarbtn(ActionEvent event) {
+    void handleCalendarbtn(ActionEvent event) throws IOException {
         selectBtn(vbox, Calendarbtn);
+
+        FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/calendar.fxml"));
+        AnchorPane content = contentLoader.load();
+        root.setCenter(content);
 
     }
 
@@ -60,7 +64,7 @@ public class LeftDashboardController implements Initializable{
     void handleCoursesbtn(ActionEvent event) throws IOException {
         selectBtn(vbox, Coursesbtn);
 
-        FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursePanel_updated.fxml"));
+        FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
         AnchorPane content = contentLoader.load();
         root.setCenter(content);
 
