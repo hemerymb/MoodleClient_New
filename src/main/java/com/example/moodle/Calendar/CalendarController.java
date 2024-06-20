@@ -4,11 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -25,8 +23,8 @@ import java.util.*;
 
 public class CalendarController implements Initializable {
 
-    ZonedDateTime dateFocus;
-    ZonedDateTime today;
+    private ZonedDateTime dateFocus;
+    private ZonedDateTime today;
 
     @FXML
     private Text year;
@@ -36,11 +34,6 @@ public class CalendarController implements Initializable {
 
     @FXML
     private FlowPane calendar;
-
-    @FXML
-    private Button btnprogram;
-
-    private Map<ZonedDateTime, List<CalendarActivity>> courseMap = new HashMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,7 +57,12 @@ public class CalendarController implements Initializable {
     }
 
     @FXML
-    private void openCourseProgramWindow(ActionEvent event) {
+    private void openCourseProgramWindow() {
+        openCourseProgramWindow(null);
+    }
+
+    @FXML
+    private void openCourseProgramWindow(ZonedDateTime date) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/CourseProgram.fxml"));
             Stage stage = new Stage();
@@ -74,6 +72,9 @@ public class CalendarController implements Initializable {
 
             CourseProgramController controller = loader.getController();
             controller.setCalendarController(this);
+            if (date != null) {
+                controller.setCourseDetails(date);
+            }
 
             stage.showAndWait();
         } catch (IOException e) {
@@ -81,33 +82,9 @@ public class CalendarController implements Initializable {
         }
     }
 
-    public void addCourse(CalendarActivity course) {
-        courseMap.putIfAbsent(course.getDate(), new ArrayList<>());
-        courseMap.get(course.getDate()).add(course);
-        calendar.getChildren().clear();
-        drawCalendar();
-    }
-
-    @FXML
-    private void programCourse(String courseName, String courseDuration, ZonedDateTime courseDate) {
-        Map<Integer, List<CalendarActivity>> calendarActivities = getCalendarActivitiesMonth(dateFocus, courseName, courseDuration, courseDate);
-        courseMap.put(courseDate, calendarActivities.get(courseDate.getDayOfMonth()));
-        calendar.getChildren().clear();
-        drawCalendar();
-    }
-
-    private Map<Integer, List<CalendarActivity>> getCalendarActivitiesMonth(ZonedDateTime dateFocus, String courseName, String courseDuration, ZonedDateTime courseDate) {
-        List<CalendarActivity> calendarActivities = new ArrayList<>();
-
-        // Ajout de l'activité de cours
-        calendarActivities.add(new CalendarActivity(courseDate, courseName, courseDuration));
-
-        return createCalendarMap(calendarActivities);
-    }
-
     private void drawCalendar() {
         year.setText(String.valueOf(dateFocus.getYear()));
-        month.setText(dateFocus.getMonth().toString());
+        month.setText(String.valueOf(dateFocus.getMonth()));
 
         double calendarWidth = calendar.getPrefWidth();
         double calendarHeight = calendar.getPrefHeight();
@@ -115,7 +92,11 @@ public class CalendarController implements Initializable {
         double spacingH = calendar.getHgap();
         double spacingV = calendar.getVgap();
 
+        // List of activities for a given month
+        Map<Integer, List<CalendarActivity>> calendarActivityMap = getCalendarActivitiesMonth(dateFocus);
+
         int monthMaxDate = dateFocus.getMonth().maxLength();
+        // Check for leap year
         if (dateFocus.getYear() % 4 != 0 && monthMaxDate == 29) {
             monthMaxDate = 28;
         }
@@ -139,26 +120,20 @@ public class CalendarController implements Initializable {
                 if (calculatedDate > dateOffset) {
                     int currentDate = calculatedDate - dateOffset;
                     if (currentDate <= monthMaxDate) {
-                        VBox vbox = new VBox();
                         Text dateText = new Text(String.valueOf(currentDate));
-                        vbox.getChildren().add(dateText);
+                        double textTranslationY = -(rectangleHeight / 2) * 0.75;
+                        dateText.setTranslateY(textTranslationY);
+                        stackPane.getChildren().add(dateText);
 
-                        ZonedDateTime currentDateTime = ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate, 0, 0, 0, 0, dateFocus.getZone());
-                        stackPane.setOnMouseClicked(event -> showContextMenu(stackPane, currentDateTime));
-
-                        if (courseMap.containsKey(currentDateTime)) {
-                            List<CalendarActivity> activities = courseMap.get(currentDateTime);
-                            for (CalendarActivity activity : activities) {
-                                Text courseText = new Text(activity.getCourseName() + " (" + activity.getCourseDuration() + ")");
-                                vbox.getChildren().add(courseText);
-                            }
+                        List<CalendarActivity> calendarActivities = calendarActivityMap.get(currentDate);
+                        if (calendarActivities != null) {
+                            createCalendarActivity(calendarActivities, rectangleHeight, rectangleWidth, stackPane);
                         }
 
-                        stackPane.getChildren().add(vbox);
-
-                        if (today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate) {
-                            rectangle.setStroke(Color.BLUE);
-                        }
+                        stackPane.setOnMouseClicked(event -> openCourseProgramWindow(ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate, 0, 0, 0, 0, dateFocus.getZone())));
+                    }
+                    if (today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate) {
+                        rectangle.setStroke(Color.BLUE);
                     }
                 }
                 calendar.getChildren().add(stackPane);
@@ -166,47 +141,62 @@ public class CalendarController implements Initializable {
         }
     }
 
-    private void showContextMenu(StackPane stackPane, ZonedDateTime date) {
-        ContextMenu contextMenu = new ContextMenu();
-
-        TextField courseNameField = new TextField();
-        courseNameField.setPromptText("Nom du cours");
-        MenuItem courseNameItem = new MenuItem("", courseNameField);
-
-        TextField courseDurationField = new TextField();
-        courseDurationField.setPromptText("Durée (heures)");
-        MenuItem courseDurationItem = new MenuItem("", courseDurationField);
-
-        TextField courseDateField = new TextField();
-        courseDateField.setPromptText("Date (yyyy-MM-dd)");
-        courseDateField.setText(date.toLocalDate().toString());
-        MenuItem courseDateItem = new MenuItem("", courseDateField);
-
-        MenuItem submitItem = new MenuItem("Valider");
-        submitItem.setOnAction(e -> {
-            String name = courseNameField.getText();
-            String duration = courseDurationField.getText();
-            String dateString = courseDateField.getText();
-            ZonedDateTime courseDate = ZonedDateTime.parse(dateString + "T00:00:00" + date.getOffset());
-
-            if (!name.isEmpty() && !duration.isEmpty() && !dateString.isEmpty()) {
-                CalendarActivity course = new CalendarActivity(courseDate, name, duration);
-                addCourse(course);
+    private void createCalendarActivity(List<CalendarActivity> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane) {
+        VBox calendarActivityBox = new VBox();
+        for (int k = 0; k < calendarActivities.size(); k++) {
+            if (k >= 2) {
+                Text moreActivities = new Text("...");
+                calendarActivityBox.getChildren().add(moreActivities);
+                moreActivities.setOnMouseClicked(mouseEvent -> {
+                    // On ... click print all activities for given date
+                    System.out.println(calendarActivities);
+                });
+                break;
             }
-        });
-
-        contextMenu.getItems().addAll(courseNameItem, courseDurationItem, courseDateItem, submitItem);
-        contextMenu.show(stackPane, stackPane.getScene().getWindow().getX() + stackPane.getLayoutX(), stackPane.getScene().getWindow().getY() + stackPane.getLayoutY());
+            Text text = new Text(calendarActivities.get(k).getCourseName() + ", " + calendarActivities.get(k).getDate().toLocalTime());
+            calendarActivityBox.getChildren().add(text);
+            text.setOnMouseClicked(mouseEvent -> {
+                // On Text clicked
+                System.out.println(text.getText());
+            });
+        }
+        calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);
+        calendarActivityBox.setMaxWidth(rectangleWidth * 0.8);
+        calendarActivityBox.setMaxHeight(rectangleHeight * 0.65);
+        calendarActivityBox.setStyle("-fx-background-color:ORANGE");
+        stackPane.getChildren().add(calendarActivityBox);
     }
 
-    private Map<Integer, List<CalendarActivity>> createCalendarMap(List<CalendarActivity> activities) {
-        Map<Integer, List<CalendarActivity>> calendarMap = new HashMap<>();
-        for (CalendarActivity activity : activities) {
-            int day = activity.getDate().getDayOfMonth();
-            calendarMap.putIfAbsent(day, new ArrayList<>());
-            calendarMap.get(day).add(activity);
+    private Map<Integer, List<CalendarActivity>> createCalendarMap(List<CalendarActivity> calendarActivities) {
+        Map<Integer, List<CalendarActivity>> calendarActivityMap = new HashMap<>();
+
+        for (CalendarActivity activity : calendarActivities) {
+            int activityDate = activity.getDate().getDayOfMonth();
+            if (!calendarActivityMap.containsKey(activityDate)) {
+                calendarActivityMap.put(activityDate, List.of(activity));
+            } else {
+                List<CalendarActivity> oldListByDate = calendarActivityMap.get(activityDate);
+
+                List<CalendarActivity> newList = new ArrayList<>(oldListByDate);
+                newList.add(activity);
+                calendarActivityMap.put(activityDate, newList);
+            }
         }
-        return calendarMap;
+        return calendarActivityMap;
+    }
+
+    private Map<Integer, List<CalendarActivity>> getCalendarActivitiesMonth(ZonedDateTime dateFocus) {
+        List<CalendarActivity> calendarActivities = new ArrayList<>();
+        int year = dateFocus.getYear();
+        int month = dateFocus.getMonth().getValue();
+
+        // Assuming CalendarActivity is a class that has the properties you want to display
+        // Replace this part with actual logic to get activities for the month
+        calendarActivities.add(new CalendarActivity(ZonedDateTime.of(year, month, 5, 14, 0, 0, 0, dateFocus.getZone()), "Course 1", 60));
+        calendarActivities.add(new CalendarActivity(ZonedDateTime.of(year, month, 15, 10, 0, 0, 0, dateFocus.getZone()), "Course 2", 90));
+        calendarActivities.add(new CalendarActivity(ZonedDateTime.of(year, month, 20, 16, 0, 0, 0, dateFocus.getZone()), "Course 3", 120));
+
+        return createCalendarMap(calendarActivities);
     }
 
     public ZonedDateTime getDateFocus() {

@@ -41,5 +41,4 @@
         </padding>
     </HBox>
     <Button fx:id="btnprogram" layoutX="29.0" layoutY="40.0" mnemonicParsing="false" onAction="#openCourseProgramWindow" prefHeight="31.0" prefWidth="206.0" style="-fx-background-color: orange; -fx-background-radius: 30;" text="New program" />
-
 </AnchorPane>
