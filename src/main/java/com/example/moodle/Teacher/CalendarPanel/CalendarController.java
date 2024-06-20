@@ -1,4 +1,4 @@
-package com.example.moodle.Calendar;
+package com.example.moodle.Teacher.CalendarPanel;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -28,12 +28,12 @@
                <children>
                   <VBox layoutX="1.0" layoutY="-13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" style="-fx-background-color: #fff0;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ScrollPane fx:id="scrollpane" hbarPolicy="NEVER" hmax="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="378.0" style="-fx-background: transparent; -fx-background-color: fff; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
+                        <ScrollPane fx:id="scrollpane" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="378.0" style="-fx-background: transparent; -fx-background-color: fff; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
                            <padding>
                               <Insets left="5.0" right="5.0" />
                            </padding>
                            <content>
-                              <VBox maxWidth="1.7976931348623157E308" prefWidth="349.0">
+                              <VBox maxWidth="1.7976931348623157E308">
                                  <children>
                                     <Text fill="#000000af" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                                        <font>
@@ -43,7 +43,7 @@
                                           <Insets left="5.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <TextArea fx:id="courseDescription" editable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="50.0" prefRowCount="2" style="-fx-background: #fff0; -fx-background-color: #fff0;" text="Description du cours" wrapText="true">
+                                    <TextArea fx:id="courseDescription" editable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="50.0" prefRowCount="2" style="-fx-background: #fff0; -fx-background-color: #fff0;" text="Course Description" wrapText="true">
                                        <font>
                                           <Font size="13.0" />
                                        </font>

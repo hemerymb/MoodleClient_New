@@ -1,4 +1,4 @@
-package com.example.moodle.Calendar;
+package com.example.moodle.Teacher.CalendarPanel;
 
 import java.time.ZonedDateTime;
 

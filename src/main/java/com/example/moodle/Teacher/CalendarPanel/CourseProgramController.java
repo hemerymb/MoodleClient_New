@@ -1,10 +1,9 @@
-package com.example.moodle.Calendar;
+package com.example.moodle.Teacher.CalendarPanel;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class CourseProgramController {
