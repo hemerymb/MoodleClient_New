@@ -1,0 +1,6 @@
+.button-menu {
+    -fx-background-color: #fff0;
+}
+.button-menu:focused {
+    -fx-background-color: #fff;
+}
