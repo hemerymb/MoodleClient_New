@@ -1,5 +1,7 @@
 package com.example.moodle.Login;
 
+import com.example.moodle.HelloApplication;
+import com.example.moodle.MainDry.Dry;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
@@ -8,9 +10,11 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -120,6 +124,8 @@ public class HelloController implements Initializable {
 
     @FXML
     private JFXButton ButonSignIn1;
+
+    public static BorderPane root;
 
     // Ajoutez des méthodes d'initialisation si nécessaire
     @FXML
@@ -269,6 +275,25 @@ public class HelloController implements Initializable {
         errmsg.setVisible(false);
         // Call your login logic here.
         System.out.println("User logged in: " + username2 + ", " + (isStudent ? "Student" : "Teacher"));
+        if(student.isSelected()) {
+            root = new BorderPane();
+            Dry.showDashboard(root, false);
+            Scene scene = new Scene(root, 1180, 707);
+
+            HelloApplication.stage.setTitle("Moodle Client");
+            HelloApplication.stage.setScene(scene);
+            HelloApplication.stage.show();
+        } else if(teacher.isSelected()) {
+            root = new BorderPane();
+            Dry.showDashboard(root, true);
+            Scene scene = new Scene(root, 1180, 707);
+
+            HelloApplication.stage.setTitle("Moodle Client");
+            HelloApplication.stage.setScene(scene);
+            HelloApplication.stage.show();
+        }
+
+
 
     }
 
