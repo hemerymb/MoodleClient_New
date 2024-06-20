@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="180.0" prefHeight="500.0" style="-fx-background-color: #fff;" stylesheets="@../CSS/leftDashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Student.StudentDashboard.LeftDashboardController">
+<AnchorPane maxWidth="180.0" prefHeight="500.0" style="-fx-background-color: #fff;" stylesheets="@../CSS/leftDashboard.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Student.StudentDashboard.LeftDashboardController">
    <children>
       <VBox maxWidth="180.0" minWidth="60.0" prefHeight="417.0" prefWidth="180.0" spacing="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -45,7 +45,19 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="PrivateFolesbtn" alignment="BASELINE_LEFT" ellipsisString="" graphicTextGap="15.0" maxWidth="180.0" minWidth="45.0" mnemonicParsing="false" onAction="#handlePrivateFilesbtn" prefHeight="40.0" style="-fx-background-radius: 10; -fx-border-width: 0 0 0 5; -fx-border-radius: 10;" styleClass="button-menu" text="Private files">
+            <Button fx:id="Noveltiesbtn" alignment="BASELINE_LEFT" ellipsisString="" graphicTextGap="15.0" maxWidth="180.0" minWidth="45.0" mnemonicParsing="false" onAction="#handleNoveltiesbtn" prefHeight="40.0" style="-fx-background-radius: 10; -fx-border-width: 0 0 0 5; -fx-border-radius: 10;" styleClass="button-menu" text="Novelties">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-bell.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="PrivatesFilesbtn" alignment="BASELINE_LEFT" ellipsisString="" graphicTextGap="15.0" maxWidth="180.0" minWidth="45.0" mnemonicParsing="false" onAction="#handlePrivatesFilesbtn" prefHeight="40.0" style="-fx-background-radius: 10; -fx-border-width: 0 0 0 5; -fx-border-radius: 10;" styleClass="button-menu" text="Privates files">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

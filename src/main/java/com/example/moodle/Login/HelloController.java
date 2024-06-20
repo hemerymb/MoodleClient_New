@@ -127,6 +127,8 @@ public class HelloController implements Initializable {
 
     public static BorderPane root;
 
+    public static boolean isTeacher;
+
     // Ajoutez des méthodes d'initialisation si nécessaire
     @FXML
     @Override
@@ -276,6 +278,7 @@ public class HelloController implements Initializable {
         // Call your login logic here.
         System.out.println("User logged in: " + username2 + ", " + (isStudent ? "Student" : "Teacher"));
         if(student.isSelected()) {
+            isTeacher = false;
             root = new BorderPane();
             Dry.showDashboard(root, false);
             Scene scene = new Scene(root, 1180, 707);
@@ -284,6 +287,7 @@ public class HelloController implements Initializable {
             HelloApplication.stage.setScene(scene);
             HelloApplication.stage.show();
         } else if(teacher.isSelected()) {
+            isTeacher = true;
             root = new BorderPane();
             Dry.showDashboard(root, true);
             Scene scene = new Scene(root, 1180, 707);

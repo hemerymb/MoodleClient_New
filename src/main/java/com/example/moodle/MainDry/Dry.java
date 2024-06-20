@@ -18,6 +18,7 @@ public class Dry {
         if(isTeacher) {
             FXMLLoader loader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/topDashboard_updated.fxml"));
 
+
             AnchorPane topMenu = loader.load();
 
             Label username = (Label) loader.getNamespace().get("username");
