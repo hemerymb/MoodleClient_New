@@ -88,6 +88,23 @@ public class CalendarController implements Initializable {
         drawCalendar();
     }
 
+    @FXML
+    private void programCourse(String courseName, String courseDuration, ZonedDateTime courseDate) {
+        Map<Integer, List<CalendarActivity>> calendarActivities = getCalendarActivitiesMonth(dateFocus, courseName, courseDuration, courseDate);
+        courseMap.put(courseDate, calendarActivities.get(courseDate.getDayOfMonth()));
+        calendar.getChildren().clear();
+        drawCalendar();
+    }
+
+    private Map<Integer, List<CalendarActivity>> getCalendarActivitiesMonth(ZonedDateTime dateFocus, String courseName, String courseDuration, ZonedDateTime courseDate) {
+        List<CalendarActivity> calendarActivities = new ArrayList<>();
+
+        // Ajout de l'activité de cours
+        calendarActivities.add(new CalendarActivity(courseDate, courseName, courseDuration));
+
+        return createCalendarMap(calendarActivities);
+    }
+
     private void drawCalendar() {
         year.setText(String.valueOf(dateFocus.getYear()));
         month.setText(dateFocus.getMonth().toString());
@@ -174,15 +191,22 @@ public class CalendarController implements Initializable {
 
             if (!name.isEmpty() && !duration.isEmpty() && !dateString.isEmpty()) {
                 CalendarActivity course = new CalendarActivity(courseDate, name, duration);
-                courseMap.putIfAbsent(courseDate, new ArrayList<>());
-                courseMap.get(courseDate).add(course);
-                calendar.getChildren().clear();
-                drawCalendar();
+                addCourse(course);
             }
         });
 
         contextMenu.getItems().addAll(courseNameItem, courseDurationItem, courseDateItem, submitItem);
         contextMenu.show(stackPane, stackPane.getScene().getWindow().getX() + stackPane.getLayoutX(), stackPane.getScene().getWindow().getY() + stackPane.getLayoutY());
+    }
+
+    private Map<Integer, List<CalendarActivity>> createCalendarMap(List<CalendarActivity> activities) {
+        Map<Integer, List<CalendarActivity>> calendarMap = new HashMap<>();
+        for (CalendarActivity activity : activities) {
+            int day = activity.getDate().getDayOfMonth();
+            calendarMap.putIfAbsent(day, new ArrayList<>());
+            calendarMap.get(day).add(activity);
+        }
+        return calendarMap;
     }
 
     public ZonedDateTime getDateFocus() {

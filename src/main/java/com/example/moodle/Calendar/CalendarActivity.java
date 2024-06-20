@@ -39,10 +39,6 @@ public class CalendarActivity {
 
     @Override
     public String toString() {
-        return "CalendarActivity{" +
-                "date=" + date +
-                ", courseName='" + courseName + '\'' +
-                ", courseDuration='" + courseDuration + '\'' +
-                '}';
+        return courseName + " (" + courseDuration + ")";
     }
 }
