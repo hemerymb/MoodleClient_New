@@ -3,6 +3,9 @@ package com.example.moodle.Dashboard;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.example.moodle.Login.HelloController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,88 +24,92 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class TopDashboardController implements Initializable {
 
-    @FXML
-    private Circle connectionIndic;
+    public class TopDashboardController implements Initializable {
 
-    @FXML
-    private CustomMenuItem editProfileMenu;
+        @FXML
+        private Circle connectionIndic;
 
-    @FXML
-    private CustomMenuItem logOutMenu;
+        @FXML
+        private CustomMenuItem editProfileMenu;
 
-    @FXML
-    private Label loginIndic;
+        @FXML
+        private CustomMenuItem logOutMenu;
 
-    @FXML
-    private HBox moodleLayout;
+        @FXML
+        private Label loginIndic;
 
-    @FXML
-    private Label notifIndic;
+        @FXML
+        private HBox moodleLayout;
 
-    @FXML
-    private MenuButton profileBtn;
+        @FXML
+        private Label notifIndic;
 
-    @FXML
-    private ImageView profileImg;
+        @FXML
+        private MenuButton profileBtn;
 
-    @FXML
-    private ImageView profileImg_in_menu;
+        @FXML
+        private ImageView profileImg;
 
-    @FXML
-    private ProgressBar progressBar;
+        @FXML
+        private ImageView profileImg_in_menu;
 
-    @FXML
-    private Button syncBtn;
+        @FXML
+        private ProgressBar progressBar;
 
-    @FXML
-    private ImageView syncImg;
+        @FXML
+        private Button syncBtn;
 
-    @FXML
-    private CustomMenuItem syncMenu;
+        @FXML
+        private ImageView syncImg;
 
-    @FXML
-    private Label teacherLabel;
+        @FXML
+        private CustomMenuItem syncMenu;
 
-    @FXML
-    private Tooltip tipIndic;
+        @FXML
+        private Label teacherLabel;
 
-    @FXML
-    private Label username;
+        @FXML
+        private Tooltip tipIndic;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // Any initialization logic here
-    }
+        @FXML
+        private Label username;
 
-    @FXML
-    void handleLogOutMenu(ActionEvent event) {
-        // Logic for logging out the user
-        System.out.println("Log Out Clicked");
-    }
 
-    @FXML
-    void handleProfileEdit(ActionEvent event) {
-        try {
-            // Load the FXML for the edit profile dialog
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/EditProfileDialog.fxml"));
-            Parent root = loader.load();
+        @Override
+        public void initialize(URL url, ResourceBundle rb) {
+            if (!HelloController.isTeacher) teacherLabel.setText("Student");
 
-            // Create a new stage for the dialog
-            Stage stage = new Stage();
-            stage.setTitle("Edit Profile");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
 
-    @FXML
-    void handleSyncBtn(ActionEvent event) {
-        // Logic for sync button
-        System.out.println("Sync Clicked");
+        @FXML
+        void handleLogOutMenu(ActionEvent event) {
+            // Logic for logging out the user
+            System.out.println("Log Out Clicked");
+        }
+
+        @FXML
+        void handleProfileEdit(ActionEvent event) {
+            try {
+                // Load the FXML for the edit profile dialog
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/EditProfileDialog.fxml"));
+                Parent root = loader.load();
+
+                // Create a new stage for the dialog
+                Stage stage = new Stage();
+                stage.setTitle("Edit Profile");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @FXML
+        void handleSyncBtn(ActionEvent event) {
+            // Logic for sync button
+            System.out.println("Sync Clicked");
+        }
     }
 }
