@@ -3,8 +3,8 @@ package com.example.moodle.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Teacher")
-public class Teacher implements java.io.Serializable{
+@Table(name = "users")
+public class users implements java.io.Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Teacher implements java.io.Serializable{
     @Column(name = "statut")
     private String statut;
 
-    public Teacher(Long id, String name, String surname, String username, String password, String email, String statut) {
+    public users(Long id, String name, String surname, String username, String password, String email, String statut) {
         this.id = id;
         this.name = name;
         this.surname = surname;

@@ -89,6 +89,21 @@
                         <Font name="Candara" size="17.0" />
                      </font>
                   </Label>
+                  <Label fx:id="statut1" alignment="CENTER" layoutX="198.0" layoutY="471.0" prefHeight="31.0" prefWidth="89.0" text="Statut" underline="true">
+                     <font>
+                        <Font name="Candara Light" size="17.0" />
+                     </font>
+                  </Label>
+                  <JFXRadioButton fx:id="teacher1" layoutX="308.0" layoutY="476.0" text="Teacher">
+                     <font>
+                        <Font name="Candara Light" size="18.0" />
+                     </font>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="student1" layoutX="439.0" layoutY="476.0" text="Student">
+                     <font>
+                        <Font name="Candara Light" size="18.0" />
+                     </font>
+                  </JFXRadioButton>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="Pane2" layoutX="-10.0" prefHeight="746.0" prefWidth="398.0" style="-fx-background-color: orange; -fx-background-radius: 30;">

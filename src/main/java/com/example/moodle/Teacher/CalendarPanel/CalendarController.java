@@ -73,7 +73,7 @@ public class CalendarController implements Initializable {
             CourseProgramController controller = loader.getController();
             controller.setCalendarController(this);
             if (date != null) {
-                controller.setCourseDetails(date);
+                //controller.setCourseDetails(date);
             }
 
             stage.showAndWait();

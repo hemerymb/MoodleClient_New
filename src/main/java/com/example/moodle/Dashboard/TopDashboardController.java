@@ -112,4 +112,3 @@ import javafx.stage.Stage;
             System.out.println("Sync Clicked");
         }
     }
-}

@@ -22,10 +22,10 @@ public class CourseProgramController {
         this.calendarController = calendarController;
     }
 
-    public void setCourseDetails(ZonedDateTime date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        courseDateField.setText(date.format(formatter));
-    }
+    //public void setCourseDetails(ZonedDateTime date) {
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //courseDateField.setText(date.format(formatter));
+    //}
 
     @FXML
     private void handleOk() {
