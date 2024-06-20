@@ -1,4 +1,4 @@
-package com.example.Student.StudentDashboard;
+package com.example.moodle.Student.StudentDashboard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
