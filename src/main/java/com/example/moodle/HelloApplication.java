@@ -1,5 +1,6 @@
 package com.example.moodle;
 
+import static com.example.moodle.moodleclient.Moodleclient.root;
 import com.example.moodle.MainDry.Dry;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ public class HelloApplication extends Application {
     public void start(Stage primarystage) throws IOException {
         //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/moodle/hello-view.fxml"));
         //StackPane root = fxmlLoader.load();
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
         Dry.showDashboard(root);
         Scene scene = new Scene(root, 1180, 707);
         primarystage.setTitle("Moodle Client");

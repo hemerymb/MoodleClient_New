@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="180.0" prefHeight="500.0" style="-fx-background-color: #fff;" stylesheets="@../CSS/leftDashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Teacher.Dashboard.LeftDashboardController">
+<AnchorPane fx:id="leftmenu" maxWidth="180.0" minWidth="62.0" prefHeight="500.0" style="-fx-background-color: #fff;" stylesheets="@../CSS/leftDashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Teacher.Dashboard.LeftDashboardController">
    <children>
-      <VBox maxWidth="180.0" minWidth="60.0" prefHeight="417.0" prefWidth="180.0" spacing="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="vbox" maxWidth="180.0" minWidth="60.0" prefHeight="417.0" prefWidth="180.0" spacing="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button alignment="BASELINE_LEFT" ellipsisString="" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleExbandLeftMenu" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 10; -fx-border-width: 0 5 0 5;" VBox.vgrow="ALWAYS">
+            <Button alignment="BASELINE_LEFT" ellipsisString="" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleExpandLeftMenu" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 10; -fx-border-width: 0 5 0 5;" VBox.vgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,18 +38,6 @@
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons8_task_24px_1.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="Studentsbtn" alignment="BASELINE_LEFT" ellipsisString="" graphicTextGap="15.0" maxWidth="180.0" minWidth="45.0" mnemonicParsing="false" onAction="#handleStudentsbtn" prefHeight="40.0" styleClass="button-menu" text="Students">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons8-people.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -85,7 +73,7 @@
       </VBox>
    </children>
    <padding>
-      <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+      <Insets bottom="7.0" left="7.0" right="7.0" />
    </padding>
    <opaqueInsets>
       <Insets />
