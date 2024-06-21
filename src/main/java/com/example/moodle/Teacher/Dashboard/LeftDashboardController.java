@@ -68,7 +68,7 @@ public class LeftDashboardController implements Initializable{
     void handleCoursesbtn(ActionEvent event) throws IOException {
         selectBtn(vbox, Coursesbtn);
 
-        FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
+        FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursePanel_updated.fxml"));
         AnchorPane content = contentLoader.load();
         root.setCenter(content);
 

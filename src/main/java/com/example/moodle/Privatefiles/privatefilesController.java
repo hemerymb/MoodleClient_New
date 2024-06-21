@@ -22,7 +22,7 @@ public class privatefilesController {
     @FXML
     private Button uploadButton;
 
-    @FXML
+   /* @FXML
     private ListView<filesdetails> fileListView;
 
     @FXML
@@ -120,5 +120,5 @@ public class privatefilesController {
                     privateFile.getFilePath()
             ));
         }
-    }
+    }*/
 }
