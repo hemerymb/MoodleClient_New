@@ -93,8 +93,11 @@ public class LeftDashboardController implements Initializable{
     }
 
     @FXML
-    void handlePrivateFilesbtn(ActionEvent event) {
+    void handlePrivateFilesbtn(ActionEvent event) throws IOException {
         selectBtn(vbox, PrivateFolesbtn);
+        FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/privatefiles.fxml"));
+        AnchorPane content = contentLoader.load();
+        root.setCenter(content);
 
     }
 

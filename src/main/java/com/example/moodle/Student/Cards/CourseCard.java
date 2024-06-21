@@ -1,6 +1,6 @@
 package com.example.moodle.Student.Cards;
 
-import com.example.moodle.Student.StudentCoursesPanel.Course;
+import com.example.moodle.Student.Entities.Course;
 import com.example.moodle.Student.StudentCoursesPanel.StudentAvailableCourseCardController;
 import com.example.moodle.Teacher.CoursesPanel.AvailableCourseCard.AvailableCourseCardController;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,8 @@ public class CourseCard extends Pane {
             FXMLLoader loader = new FXMLLoader(CourseCard.class.getResource("/com/example/moodle/FXML/student_AvailableCourseCard_updated.fxml"));
             this.pane = loader.load();
             StudentAvailableCourseCardController cardController = loader.getController();
-            cardController.define(course.getCourseName(), course.getDescription(), course.getNbChapters());
+            cardController.define(course.getCourseName(), course.getCourseDescription(), course.getNbChapters());
+            cardController.setCourse(course);
             getChildren().add(this.pane);
         } catch (IOException e) {
             e.printStackTrace();

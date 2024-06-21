@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -17,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="510.0" prefWidth="510.0" style="-fx-background-color: fff;" stylesheets="@../CSS/CourseViewPanel.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Teacher.CoursesPanel.CourseViewPanelController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="510.0" prefWidth="510.0" style="-fx-background-color: fff;" stylesheets="@../CSS/CourseViewPanel.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Teacher.CoursesPanel.CourseViewPanelController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: e2e2e2; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -107,34 +106,6 @@
                            </padding>
                         </Label>
                         <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="EditCourse" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" minWidth="-Infinity" onMouseClicked="#handleEditCourse" style="-fx-background-radius: 50; -fx-background-color: #2646ff;" text="🖍 Edit" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets bottom="3.0" right="5.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="2.0" left="5.0" right="7.0" top="2.0" />
-                           </padding>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="deleteCourse" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" minWidth="-Infinity" onMouseClicked="#handleDeleteCourse" style="-fx-background-radius: 50; -fx-background-color: ff6464;" text="❌ Delete" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets bottom="3.0" right="10.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="2.0" left="5.0" right="7.0" top="2.0" />
-                           </padding>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
                      </children>
                   </HBox>
                </children>

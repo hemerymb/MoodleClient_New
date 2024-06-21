@@ -1,11 +1,10 @@
 package com.example.moodle.Student.StudentDashboard;
 
-import static com.example.moodle.moodleclient.Moodleclient.root;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.moodle.moodleclient.Moodleclient.root;
 import com.example.moodle.MainDry.Dry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
