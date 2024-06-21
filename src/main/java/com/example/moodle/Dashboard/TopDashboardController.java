@@ -3,6 +3,7 @@ package com.example.moodle.Dashboard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.moodle.Login.HelloController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 public class TopDashboardController implements Initializable{
-
     @FXML
     private Circle connectionIndic;
 
@@ -66,9 +66,10 @@ public class TopDashboardController implements Initializable{
     @FXML
     private Label username;
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        if(!HelloController.isTeacher) teacherLabel.setText("Student");
     }
 
     @FXML

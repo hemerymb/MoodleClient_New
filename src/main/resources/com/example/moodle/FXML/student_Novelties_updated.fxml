@@ -9,10 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="510.0" prefWidth="510.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Student.StudentCoursesPanel.StudentCoursesPanelController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="510.0" prefWidth="510.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Student.StudentNoveltiesPanels.StudentNoveltiesController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: e2e2e2; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -25,7 +26,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" prefHeight="26.0" prefWidth="130.0" text="Existing courses" textFill="#2b2b2bad">
+                              <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" prefHeight="26.0" prefWidth="130.0" text="Recent courses" textFill="#2b2b2bad">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -44,10 +45,10 @@
                               <Insets left="5.0" right="5.0" />
                            </padding>
                            <content>
-                              <GridPane fx:id="gridpane" prefHeight="660.0" prefWidth="1120.0">
-<!--                                <rowConstraints>-->
-<!--                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
-<!--                                </rowConstraints>-->
+                              <GridPane fx:id="gridpane" prefHeight="0.0" prefWidth="0.0">
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                               </GridPane>
                            </content></ScrollPane>
                      </children>
@@ -69,7 +70,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="26.0" layoutY="7.0" prefHeight="29.0" prefWidth="207.0" style="-fx-background-color: #fff0;" text="Courses" textFill="#434343">
+                  <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="26.0" layoutY="7.0" prefHeight="29.0" prefWidth="207.0" style="-fx-background-color: #fff0;" text="Novelties" textFill="#434343">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
