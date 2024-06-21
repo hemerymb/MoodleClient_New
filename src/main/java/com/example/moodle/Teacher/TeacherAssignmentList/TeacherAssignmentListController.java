@@ -1,13 +1,20 @@
 package com.example.moodle.Teacher.TeacherAssignmentList;
 
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.HBox;
+
+import java.awt.*;
+import java.net.URL;
 import java.util.ResourceBundle;
 
-@FXML
-private HBox addAsignBox;
 
-@FXML private SrollPaneScrollPane assignScrollPane;
+public class TeacherAssignmentListController implements Initializable {
 
-public class TeacherAssignmentListController {
+    @FXML
+    private HBox addAsignBox;
+
+    @FXML private ScrollPane assignScrollPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

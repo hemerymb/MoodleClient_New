@@ -1,3 +1,9 @@
+package com.example.moodle.Teacher.TeacherAssignmentDetails;
+
+import javafx.fxml.FXML;
+
+import java.awt.*;
+
 public class TeacherAssignmentDetailsController {
 
     @FXML

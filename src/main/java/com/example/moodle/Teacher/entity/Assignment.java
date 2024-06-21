@@ -1,8 +1,10 @@
+package com.example.moodle.Teacher.entity;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Assignment {
+public class Assignment<Cours> {
     
     private String assignmentId;
     private Cours cours;
@@ -18,15 +20,16 @@ public class Assignment {
     private Byte ignored = 0; // l'étudiant a ignoré la notification de devoir (1) ou pas (0)
     private Set ressourceDevoirs = new HashSet(0);
     private Set assignmentSubmissions = new HashSet(0);
+    private Integer id;
 
-    public Devoirs() {
+    public void Devoirs() {
     }
 
-    public Devoirs(String remoteId) {
+    public void Devoirs(String remoteId) {
         this.remoteId = remoteId;
     }
 
-    public Devoirs(Cours cours, String enonce, Date dateLimite, String etat, String remoteId, Date createdAt, Date updatedAt, Set ressourceDevoirs, Set assignmentSubmissions) {
+    public void Devoirs(Cours cours, String enonce, Date dateLimite, String etat, String remoteId, Date createdAt, Date updatedAt, Set ressourceDevoirs, Set assignmentSubmissions) {
        this.cours = cours;
        this.enonce = enonce;
        this.dateLimite = dateLimite;
