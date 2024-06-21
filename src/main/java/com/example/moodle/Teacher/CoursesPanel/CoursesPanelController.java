@@ -77,7 +77,6 @@ public class CoursesPanelController implements Initializable {
             e.printStackTrace();
         }
     }
-
     public void addCourseCard(CourseCard courseCard) {
 
         list.add(courseCard);

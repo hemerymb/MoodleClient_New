@@ -65,6 +65,7 @@ public class Dry {
 
 
 
+
        // FXMLLoader leftLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/leftDashboard_updated.fxml"));
         //AnchorPane leftMenu = leftLoader.load();
         //root.setLeft(leftMenu);
@@ -72,6 +73,7 @@ public class Dry {
         // root.setRight(rightMenu);
         
         //Le leftMenu se charge de mettre à jour le contenu central donc, plus besoin de ceci.
+
         //FXMLLoader leftLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/leftDashboard_updated.fxml"));
         //AnchorPane leftMenu = leftLoader.load();
         //root.setLeft(leftMenu);
