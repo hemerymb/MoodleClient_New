@@ -1,10 +1,13 @@
 package com.example.moodle.Student.StudentDashboard;
 
+import static com.example.moodle.moodleclient.Moodleclient.root;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.example.moodle.moodleclient.Moodleclient.root;
+
 import com.example.moodle.MainDry.Dry;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -52,7 +55,7 @@ public class LeftDashboardController implements Initializable{
             selectBtn(vbox, Assignmentsbtn);
             FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/student_assigmentPanel_updated.fxml"));
             AnchorPane content = contentLoader.load();
-            HelloController.root.setCenter(content);
+            root.setCenter(content);
         } catch (IOException e) {
             e.printStackTrace();
         }

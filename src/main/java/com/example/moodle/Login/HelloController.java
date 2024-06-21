@@ -1,10 +1,14 @@
 package com.example.moodle.Login;
 
 import static com.example.moodle.moodleclient.Moodleclient.root;
+import static com.example.moodle.moodleclient.Moodleclient.user;
+
 
 import com.example.moodle.DBConnection;
 import com.example.moodle.HelloApplication;
 import com.example.moodle.MainDry.Dry;
+import com.example.moodle.moodleclient.Moodleclient;
+import com.example.moodle.moodleclient.client_moodle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
@@ -143,6 +147,9 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        user = new client_moodle();
+
         // Initialisation
         hello.setVisible(false);
         sms4.setVisible(false);
@@ -336,7 +343,13 @@ public class HelloController implements Initializable {
         if (checkCredentials(userName, pass, isTeacher)) {
             tryconnect.setText("Connected successfully!");
             tryconnect.setVisible(true);
+
+            user.setUsername(userName);
+
             if (student1.isSelected()) {
+
+                user.is_Teacher(false);
+
                 HelloController.isTeacher = false;
                 root = new BorderPane();
                 Dry.showDashboard(root, false);
@@ -346,6 +359,9 @@ public class HelloController implements Initializable {
                 HelloApplication.stage.setScene(scene);
                 HelloApplication.stage.show();
             } else if (teacher1.isSelected()) {
+
+                user.is_Teacher(true);
+
                 HelloController.isTeacher = true;
                 root = new BorderPane();
                 Dry.showDashboard(root, true);

@@ -32,6 +32,7 @@ public class AvailableCourseCardController implements Initializable {
     }
 
 
+
     @FXML
     void handleCourseView(MouseEvent event) throws IOException {
         FXMLLoader contentLoader = new FXMLLoader(AvailableCourseCardController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
@@ -44,5 +45,12 @@ public class AvailableCourseCardController implements Initializable {
         this.courseDesc.setText(description);
         // this.ChaptersNumber.setText(String.valueOf(chapters) + " Chapitres");
     }
+
+    @FXML
+    void handleCourseView(MouseEvent event) {
+        System.out.println("Yo");
+    }
+
+
 }
 

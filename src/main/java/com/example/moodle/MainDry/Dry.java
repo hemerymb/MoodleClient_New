@@ -64,6 +64,7 @@ public class Dry {
 
 
 
+
        // FXMLLoader leftLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/leftDashboard_updated.fxml"));
         //AnchorPane leftMenu = leftLoader.load();
         //root.setLeft(leftMenu);
@@ -71,6 +72,17 @@ public class Dry {
         // root.setRight(rightMenu);
         
         //Le leftMenu se charge de mettre à jour le contenu central donc, plus besoin de ceci.
+        //FXMLLoader leftLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/leftDashboard_updated.fxml"));
+        //AnchorPane leftMenu = leftLoader.load();
+        //root.setLeft(leftMenu);
+        //// AnchorPane rightMenu =  (AnchorPane)FXMLLoader.load(Dry.class.getResource("/SDashboard/rightDashboard.fxml"));
+        //// root.setRight(rightMenu);
+        //
+        ////Le leftMenu se charge de mettre à jour le contenu central donc, plus besoin de ceci.
+        //FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
+        //AnchorPane content = contentLoader.load();
+        //root.setCenter(content);
+
 
        // FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
         //AnchorPane content = contentLoader.load();

@@ -1,6 +1,8 @@
-package com.example.moodle.Teacher.CoursesPanel;
+package com.example.moodle.Teacher.CoursesPanel.DialogWindows;
 
-import com.example.moodle.Teacher.CoursesPanel.AvailableCourseCard.AvailableCourseCardController;
+import com.example.moodle.Teacher.Cards.CourseCard;
+import com.example.moodle.Teacher.entity.Course;
+import com.example.moodle.Teacher.CoursesPanel.CoursesPanelController;
 import com.example.moodle.dao.CourseDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,10 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,44 +27,37 @@ public class CreateCourseDialogController implements Initializable {
     @FXML
     private TextField shortnamefield;
 
-    private CoursesPanelController coursesPanelController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void setCoursesPanelController(CoursesPanelController controller) {
-        this.coursesPanelController = controller;
-    }
-
     @FXML
     void createCourse(ActionEvent event) {
-        String courseName = namefield.getText();
-        String courseAbr = shortnamefield.getText();
-        String courseDescription = descriptionfield.getText();
 
         int nbChapters = 0;
         int nbAssignments = 0;
 
-        if (courseName.isEmpty() || courseAbr.isEmpty() || courseDescription.isEmpty()) {
+        if (namefield.getText().isEmpty() || shortnamefield.getText().isEmpty() || descriptionfield.getText().isEmpty()) {
             System.out.println("All fields must be filled out!");
             return;
         }
 
         try {
-            CourseDAO.insertCourse(courseName, courseAbr, courseDescription, nbChapters, nbAssignments);
+            CourseDAO.insertCourse(namefield.getText(), shortnamefield.getText(), descriptionfield.getText(), nbChapters, nbAssignments);
             System.out.println("Course created successfully.");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/AvailableCourseCard_updated.fxml"));
-            Pane courseCard = loader.load();
+            FXMLLoader coursesloader = new FXMLLoader(CreateCourseDialogController.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
+            coursesloader.load();
+            CoursesPanelController CourseCtrler = coursesloader.getController();
+            CourseCtrler.addCourseCard(new CourseCard(new Course(
+                    namefield.getText(),
+                    descriptionfield.getText(),
+                    0
+            )));
 
-            AvailableCourseCardController controller = loader.getController();
-            controller.setCourseDetails(courseName, courseDescription, nbChapters);
 
-            if (coursesPanelController != null) {
-                coursesPanelController.addCourseCard(courseCard);
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
