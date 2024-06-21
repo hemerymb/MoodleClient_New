@@ -73,7 +73,7 @@ public class CoursesPanelController implements Initializable {
     }
 
     private void addCourseToDatabase(String courseName) {
-        String query = "INSERT INTO course (name) VALUES (?)";
+        String query = "INSERT INTO course (courseName) VALUES (?)";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, courseName);
@@ -94,12 +94,12 @@ public class CoursesPanelController implements Initializable {
     private Connection connect() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/moodleclient";
         String user = "root";
-        String password = "root";
+        String password = "";
         return DriverManager.getConnection(url, user, password);
     }
 
     private boolean isCourseInDatabase(String courseName) {
-        String query = "SELECT COUNT(*) FROM course WHERE name = ?";
+        String query = "SELECT COUNT(*) FROM course WHERE courseName = ?";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, courseName);
@@ -119,7 +119,7 @@ public class CoursesPanelController implements Initializable {
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
-                String courseName = rs.getString("name");
+                String courseName = rs.getString("courseName");
                 Pane courseCard = createCourseCard(courseName);
                 addCourseCard(courseCard);
             }
