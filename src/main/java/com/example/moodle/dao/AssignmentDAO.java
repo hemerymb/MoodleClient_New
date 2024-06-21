@@ -1,7 +1,8 @@
 package com.example.moodle.dao;
 
+import com.example.moodle.Teacher.entity.Assignment;
+
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,7 +58,7 @@ public class AssignmentDAO {
     }
 
     // Méthode pour lire tous les devoirs
-    public static void readAssignments() {
+    public static List<Assignment> readAssignments() {
         String query = "SELECT * FROM assignments";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
              Statement statement = connection.createStatement();
@@ -75,6 +76,7 @@ public class AssignmentDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     // Méthode pour mettre à jour un devoir
