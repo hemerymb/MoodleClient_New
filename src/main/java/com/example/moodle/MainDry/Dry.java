@@ -35,7 +35,7 @@ public class Dry {
             // root.setRight(rightMenu);
 
             //Le leftMenu se charge de mettre à jour le contenu central donc, plus besoin de ceci.
-            FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/TeacherAssignmentPanel.fxml"));
+            FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursePanel_updated.fxml"));
             AnchorPane content = contentLoader.load();
             root.setCenter(content);
         } else {

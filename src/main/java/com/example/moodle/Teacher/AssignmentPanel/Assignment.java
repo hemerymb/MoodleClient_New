@@ -10,15 +10,10 @@ public class Assignment {
     private String courseName;
     private String statut;
 
-    public Assignment(int id, String assignmentName, Date createdDate, Date limitedDate, String courseName, String statut) {
-        this.id = id;
-        this.assignmentName = assignmentName;
-        this.createdDate = createdDate;
-        this.limitedDate = limitedDate;
-        this.courseName = courseName;
-        this.statut = statut;
+    public Assignment(int id, String assignmentName, Date createdDate, Date limitedDate, String courseName) {
     }
 
+    // Getters
     public int getId() {
         return id;
     }
@@ -41,5 +36,30 @@ public class Assignment {
 
     public String getStatut() {
         return statut;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setLimitedDate(Date limitedDate) {
+        this.limitedDate = limitedDate;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 }

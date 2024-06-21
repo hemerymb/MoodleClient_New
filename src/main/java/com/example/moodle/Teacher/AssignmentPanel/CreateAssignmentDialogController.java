@@ -6,48 +6,59 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.sql.Date;
 
 public class CreateAssignmentDialogController {
 
     @FXML
-    private TextField assignmentNameField;
+    private TextField assignNameTextField;
 
     @FXML
-    private DatePicker createdDatePicker;
+    private DatePicker openDatePicker;
 
     @FXML
-    private DatePicker limitedDatePicker;
+    private DatePicker dueDatePicker;
 
     @FXML
-    private TextField courseNameField;
+    private TextField courseNameTextfiel;
 
     @FXML
-    private TextField statutField;
+    private Button createBtn;
 
     @FXML
-    private Button createButton;
+    private Button cancelBtn;
 
     private boolean assignmentCreated = false;
 
+    public CreateAssignmentDialogController() {
+        // Constructeur par défaut requis pour JavaFX
+    }
+
     @FXML
     private void handleCreate() {
-        String assignmentName = assignmentNameField.getText();
-        Date createdDate = Date.valueOf(createdDatePicker.getValue());
-        Date limitedDate = Date.valueOf(limitedDatePicker.getValue());
-        String courseName = courseNameField.getText();
-        String statut = statutField.getText();
+        try {
+            String assignmentName = assignNameTextField.getText();
+            Date createdDate = Date.valueOf(openDatePicker.getValue());
+            Date limitedDate = Date.valueOf(dueDatePicker.getValue());
+            String courseName = courseNameTextfiel.getText();
 
-        AssignmentDAO.insertAssignment(assignmentName, createdDate, limitedDate, courseName, statut);
-        assignmentCreated = true;
+            System.out.println("Inserting assignment: " + assignmentName + ", " + createdDate + ", " + limitedDate + ", " + courseName);
 
-        Stage stage = (Stage) createButton.getScene().getWindow();
-        stage.close();
+            AssignmentDAO.insertAssignment(assignmentName, createdDate, limitedDate, courseName);
+            assignmentCreated = true;
+
+            Stage stage = (Stage) createBtn.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            System.out.println("Error in handleCreate");
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void handleCancel() {
-        Stage stage = (Stage) createButton.getScene().getWindow();
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
