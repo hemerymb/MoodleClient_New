@@ -2,21 +2,23 @@ package com.example.moodle.Student.studentAssigmentPanel;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.scene.layout.VBox;
 
 public class studentAssigmentCardController {
 
     @FXML
-    private Label courseDesc;
+    private Label ChaptersNumber;
+
+    @FXML
+    private Label ChaptersNumber1;
+
+    @FXML
+    private VBox assigment;
+
+    @FXML
+    private Label assigmentName;
 
     @FXML
     private Label courseName;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-    }
 
 }
