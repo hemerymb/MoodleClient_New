@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutX="5.0" layoutY="4.0" prefHeight="392.0" prefWidth="586.0">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="433.0" prefWidth="586.0">
+                     <children>
+                        <AnchorPane layoutX="21.0" layoutY="15.0" prefHeight="60.0" prefWidth="551.0" style="-fx-background-color: ORANGE; -fx-background-radius: 20;">
+                           <children>
+                              <Label layoutX="94.0" layoutY="14.0" text="List of the assignments your courses " textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <VBox layoutX="14.0" layoutY="131.0" prefHeight="277.0" prefWidth="552.0">
+                           <children>
+                              <ScrollPane prefHeight="281.0" prefWidth="552.0" />
+                           </children>
+                        </VBox>
+                        <HBox fx:id="addAssignBox" layoutX="374.0" layoutY="87.0" onMouseClicked="#handleAddAssign" prefHeight="32.0" prefWidth="175.0">
+                           <children>
+                              <ImageView fitHeight="22.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../resources/com/example/moodle/images/plus-symbole-noir.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="Add assignement">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold Italic" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

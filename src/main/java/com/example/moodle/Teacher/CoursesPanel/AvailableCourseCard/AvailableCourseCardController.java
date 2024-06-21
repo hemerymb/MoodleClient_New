@@ -6,12 +6,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 public class AvailableCourseCardController implements Initializable{
-    @FXML
-    private Label ChaptersNumber;
 
     @FXML
     private Label courseDesc;
@@ -19,16 +15,9 @@ public class AvailableCourseCardController implements Initializable{
     @FXML
     private Label courseName;
 
-    @FXML
-    private Pane pane;
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }
-
-    @FXML
-    void handleCourse(MouseEvent event) {
-        System.out.println("Yo");
+        
     }
 
 }
