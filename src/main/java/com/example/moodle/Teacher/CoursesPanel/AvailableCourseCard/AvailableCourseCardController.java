@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 public class AvailableCourseCardController implements Initializable{
     @FXML
-    private Label chaptersNumber;
+    private Label ChaptersNumber;
 
     @FXML
     private Label courseDesc;
@@ -24,14 +24,6 @@ public class AvailableCourseCardController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }
-
-    public void define(String courseName, String description, int nbChapters) {
-        this.courseName.setText(courseName);
-        this.courseDesc.setText(description);
-        this.courseDesc.setStyle("-fx-text-fill: black");
-        this.chaptersNumber.setText(nbChapters + " Chapitres");
-        this.chaptersNumber.setStyle("-fx-text-fill: black");
     }
 
     @FXML

@@ -43,7 +43,7 @@
                                           <Insets top="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Label fx:id="chaptersNumber" text="N Chapitres">
+                                    <Label fx:id="ChaptersNumber" text="N Chapitres">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
