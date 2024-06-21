@@ -15,14 +15,13 @@ import javafx.scene.layout.AnchorPane;
 import static com.example.moodle.moodleclient.Moodleclient.root;
 
 public class AvailableCourseCardController implements Initializable{
-    @FXML
-    private Label ChaptersNumber;
 
     @FXML
     private Label courseDesc;
 
     @FXML
     private Label courseName;
+
 
 
 
@@ -41,6 +40,6 @@ public class AvailableCourseCardController implements Initializable{
     public void setCourseDetails(String name, String description, int chapters) {
         this.courseName.setText(name);
         this.courseDesc.setText(description);
-        this.ChaptersNumber.setText(String.valueOf(chapters) + " Chapitres");
+        // this.ChaptersNumber.setText(String.valueOf(chapters) + " Chapitres");
     }
 }
