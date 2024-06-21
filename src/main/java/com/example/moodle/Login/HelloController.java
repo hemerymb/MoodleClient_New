@@ -1,5 +1,8 @@
 package com.example.moodle.Login;
 
+import static com.example.moodle.moodleclient.Moodleclient.root;
+
+import com.example.moodle.DBConnection;
 import com.example.moodle.HelloApplication;
 import com.example.moodle.MainDry.Dry;
 import com.jfoenix.controls.JFXButton;
@@ -8,8 +11,8 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -19,9 +22,11 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.lang.Override;
-
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -81,10 +86,19 @@ public class HelloController implements Initializable {
     private JFXRadioButton teacher;
 
     @FXML
+    private JFXRadioButton teacher1;
+
+    @FXML
     private JFXRadioButton student;
 
     @FXML
+    private JFXRadioButton student1;
+
+    @FXML
     private Label statut;
+
+    @FXML
+    private Label statut1;
 
     @FXML
     private JFXButton ButtonSignUp;
@@ -125,12 +139,8 @@ public class HelloController implements Initializable {
     @FXML
     private JFXButton ButonSignIn1;
 
-    public static BorderPane root;
-
     public static boolean isTeacher;
 
-    // Ajoutez des méthodes d'initialisation si nécessaire
-    @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Initialisation
@@ -142,6 +152,9 @@ public class HelloController implements Initializable {
         message2.setVisible(false);
         username1.setVisible(false);
         password1.setVisible(false);
+        statut1.setVisible(false);
+        teacher1.setVisible(false);
+        student1.setVisible(false);
         Forget.setVisible(false);
         name.setVisible(true);
         surname.setVisible(true);
@@ -152,10 +165,11 @@ public class HelloController implements Initializable {
         teacher.setVisible(true);
         student.setVisible(true);
 
-    this.errmsg.setText("");
-    this.errmsg.setVisible(false);
-    this.tryconnect.setVisible(false);
+        this.errmsg.setText("");
+        this.errmsg.setVisible(false);
+        this.tryconnect.setVisible(false);
     }
+
     public void btn(javafx.scene.input.MouseEvent mouseEvent) {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.7));
@@ -183,6 +197,9 @@ public class HelloController implements Initializable {
         ButtonSignUp1.setVisible(false);
         username1.setVisible(true);
         password1.setVisible(true);
+        statut1.setVisible(true);
+        teacher1.setVisible(true);
+        student1.setVisible(true);
         Forget.setVisible(true);
         name.setVisible(false);
         surname.setVisible(false);
@@ -225,6 +242,9 @@ public class HelloController implements Initializable {
         ButtonSignUp1.setVisible(true);
         username1.setVisible(false);
         password1.setVisible(false);
+        statut1.setVisible(false);
+        teacher1.setVisible(false);
+        student1.setVisible(false);
         Forget.setVisible(false);
         name.setVisible(true);
         surname.setVisible(true);
@@ -240,65 +260,104 @@ public class HelloController implements Initializable {
         }));
     }
 
+    private boolean checkCredentials(String userName, String pass, boolean isTeacher) {
+        try (Connection connection = DBConnection.getConnection()) {
+            String query = "SELECT COUNT(*) FROM Users WHERE username = ? AND password = ? AND statut = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, userName);
+                statement.setString(2, pass);
+                statement.setString(3, isTeacher ? "Teacher" : "Student");
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt(1) > 0;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            errmsg.setText("Error: " + e.getMessage());
+            errmsg.setVisible(true);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     @FXML
     private void handleSignUpBtn(ActionEvent event) {
         String firstName = name.getText();
         String lastName = surname.getText();
-        String username = username1.getText();
-        String password = password1.getText();
-        String e_mail = email.getText();
-        boolean isStudent = student.isSelected();
+        String userName = username.getText();
+        String pass = password.getText();
+        String emailAddr = email.getText();
+        boolean isTeacherSelected = teacher.isSelected();
 
-        if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || password.isEmpty() || e_mail.isEmpty() || (!student.isSelected() && !teacher.isSelected())) {
+        if (firstName.isEmpty() || lastName.isEmpty() || userName.isEmpty() || pass.isEmpty() || emailAddr.isEmpty() || (!student.isSelected() && !teacher.isSelected())) {
             errmsg.setText("All fields must be filled out!");
             errmsg.setVisible(true);
             return;
         }
 
         errmsg.setVisible(false);
-        tryconnect.setVisible(true);
-        tryconnect.setText("user register succeffully!!!");
-        // Call your account creation logic here.
-        System.out.println("User signed up: " + firstName + " " + lastName + ", " + username + ", " + e_mail + ", " + (isStudent ? "Student" : "Teacher"));
+        try (Connection connection = DBConnection.getConnection()) {
+            String query = "INSERT INTO Users (name, surname, username, password, email, statut) VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, firstName);
+                statement.setString(2, lastName);
+                statement.setString(3, userName);
+                statement.setString(4, pass);
+                statement.setString(5, emailAddr);
+                statement.setString(6, isTeacherSelected ? "Teacher" : "Student");
+                statement.executeUpdate();
+                tryconnect.setVisible(true);
+                tryconnect.setText("User registered successfully!");
+            }
+        } catch (SQLException e) {
+            errmsg.setText("Error: " + e.getMessage());
+            errmsg.setVisible(true);
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void handleLoginBtn(ActionEvent event) throws IOException {
-        String username2 = username1.getText();
-        String password2 = password1.getText();
-        boolean isStudent = student.isSelected();
+        String userName = username1.getText();
+        String pass = password1.getText();
+        boolean isStudent = student1.isSelected();
+        boolean isTeacher = teacher1.isSelected();
 
-        if (username2.isEmpty() || password2.isEmpty() || (!student.isSelected() && !teacher.isSelected())) {
+        if (userName.isEmpty() || pass.isEmpty() || (!student1.isSelected() && !teacher1.isSelected())) {
             errmsg.setText("You must enter a username, password, and select a status!");
             errmsg.setVisible(true);
             return;
         }
 
         errmsg.setVisible(false);
-        // Call your login logic here.
-        System.out.println("User logged in: " + username2 + ", " + (isStudent ? "Student" : "Teacher"));
-        if(student.isSelected()) {
-            isTeacher = false;
-            root = new BorderPane();
-            Dry.showDashboard(root, false);
-            Scene scene = new Scene(root, 1180, 707);
 
-            HelloApplication.stage.setTitle("Moodle Client");
-            HelloApplication.stage.setScene(scene);
-            HelloApplication.stage.show();
-        } else if(teacher.isSelected()) {
-            isTeacher = true;
-            root = new BorderPane();
-            Dry.showDashboard(root, true);
-            Scene scene = new Scene(root, 1180, 707);
+        if (checkCredentials(userName, pass, isTeacher)) {
+            tryconnect.setText("Connected successfully!");
+            tryconnect.setVisible(true);
+            if (student1.isSelected()) {
+                HelloController.isTeacher = false;
+                root = new BorderPane();
+                Dry.showDashboard(root, false);
+                Scene scene = new Scene(root, 1180, 707);
 
-            HelloApplication.stage.setTitle("Moodle Client");
-            HelloApplication.stage.setScene(scene);
-            HelloApplication.stage.show();
+                HelloApplication.stage.setTitle("Moodle Client");
+                HelloApplication.stage.setScene(scene);
+                HelloApplication.stage.show();
+            } else if (teacher1.isSelected()) {
+                HelloController.isTeacher = true;
+                root = new BorderPane();
+                Dry.showDashboard(root, true);
+                Scene scene = new Scene(root, 1180, 707);
+
+                HelloApplication.stage.setTitle("Moodle Client");
+                HelloApplication.stage.setScene(scene);
+                HelloApplication.stage.show();
+            }
+        } else {
+            errmsg.setText("User does not exist!");
+            errmsg.setVisible(true);
         }
-
-
-
     }
-
 }

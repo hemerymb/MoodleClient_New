@@ -1,5 +1,6 @@
 package com.example.moodle;
 
+import static com.example.moodle.moodleclient.Moodleclient.root;
 import com.example.moodle.MainDry.Dry;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ public class HelloApplication extends Application {
     public static Stage stage;
     @Override
     public void start(Stage primarystage) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/moodle/FXML/hello-view.fxml"));
         StackPane root = fxmlLoader.load();
         Scene scene = new Scene(root, 1180, 707);
