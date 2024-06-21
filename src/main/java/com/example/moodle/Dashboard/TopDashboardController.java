@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.moodle.HelloApplication;
 import com.example.moodle.Login.HelloController;
 
 import javafx.event.ActionEvent;
@@ -20,12 +21,17 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import static com.example.moodle.HelloApplication.stage;
+import static com.example.moodle.moodleclient.Moodleclient.user;
 
 
-    public class TopDashboardController implements Initializable {
+public class TopDashboardController implements Initializable {
 
         @FXML
         private Circle connectionIndic;
@@ -79,13 +85,23 @@ import javafx.stage.Stage;
         @Override
         public void initialize(URL url, ResourceBundle rb) {
             if (!HelloController.isTeacher) teacherLabel.setText("Student");
-
+            username.setText(user.getUsername());
         }
 
         @FXML
-        void handleLogOutMenu(ActionEvent event) {
-            // Logic for logging out the user
-            System.out.println("Log Out Clicked");
+        void handleLogOutMenu(ActionEvent event) throws IOException {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/LOgOutDialog.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         @FXML

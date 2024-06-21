@@ -1,4 +1,4 @@
-package com.example.moodle.Teacher.CoursesPanel;
+package com.example.moodle.Teacher.CoursesPanel.DialogWindows;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

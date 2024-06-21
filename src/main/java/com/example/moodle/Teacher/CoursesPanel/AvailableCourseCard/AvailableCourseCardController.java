@@ -35,7 +35,7 @@ public class AvailableCourseCardController implements Initializable{
     }
 
     @FXML
-    void handleCourse(MouseEvent event) {
+    void handleCourseView(MouseEvent event) {
         System.out.println("Yo");
     }
 

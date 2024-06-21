@@ -1,12 +1,9 @@
 package com.example.moodle;
 
 import static com.example.moodle.moodleclient.Moodleclient.root;
-import com.example.moodle.MainDry.Dry;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 

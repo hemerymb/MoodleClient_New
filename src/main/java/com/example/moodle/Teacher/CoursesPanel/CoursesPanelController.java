@@ -7,8 +7,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.example.moodle.Teacher.Cards.CourseCard;
+import com.example.moodle.Teacher.entity.Course;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,13 +40,14 @@ public class CoursesPanelController implements Initializable {
     @FXML
     private GridPane gridpane;
 
-    private final int columns = 3; // Define the number of columns
+    private static ArrayList<CourseCard> list;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        gridpane.setVgap(10); // Set vertical gap between rows
-        gridpane.setHgap(10); // Set horizontal gap between columns
-        loadCoursesFromDatabase(); // Load courses from database when application starts
+        list = new ArrayList<>();
+        loadCoursesFromDatabase();
+
     }
 
     @FXML
@@ -52,21 +56,12 @@ public class CoursesPanelController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/CreateCourseDialog.fxml"));
             Parent root = loader.load();
 
-            CreateCourseDialogController createCourseDialogController = loader.getController();
-            createCourseDialogController.setCoursesPanelController(this);
-
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
-            String newCourseName = createCourseDialogController.getCourseName();
-            if (!isCourseInDatabase(newCourseName)) {
-                addCourseToDatabase(newCourseName);
-                Pane courseCard = createCourseCard(newCourseName);
-                addCourseCard(courseCard);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,18 +79,28 @@ public class CoursesPanelController implements Initializable {
     }
 
 
-    public void addCourseCard(Pane courseCard) {
-        int count = gridpane.getChildren().size(); // Get the current number of cards
-        int col = count % columns; // Calculate the column index
-        int row = count / columns; // Calculate the row index
-        gridpane.add(courseCard, col, row); // Add the card to the gridpane
-        GridPane.setMargin(courseCard, new javafx.geometry.Insets(10)); // Adds margin between course cards
+    public void addCourseCard(CourseCard courseCard) {
+
+        list.add(courseCard);
+        gridpane.getChildren().clear();
+
+        int col=0, row=0;
+        for (CourseCard card : list) {
+            gridpane.add(card, col, row);
+            col++;
+
+            int columns = 4;//(int) Math.floor(scrollpane.getWidth() / 100);
+            if (col >= columns) {
+                col = 0;
+                row++;
+            }
+        }
     }
 
     private Connection connect() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/your_database";
+        String url = "jdbc:mysql://localhost:3306/moodleclient";
         String user = "root";
-        String password = "root";
+        String password = "681503533";
         return DriverManager.getConnection(url, user, password);
     }
 
@@ -115,14 +120,19 @@ public class CoursesPanelController implements Initializable {
     }
 
     private void loadCoursesFromDatabase() {
-        String query = "SELECT name FROM course";
+        String query = "SELECT * FROM Course";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
-                String courseName = rs.getString("name");
-                Pane courseCard = createCourseCard(courseName); // Assume you have a method to create a course card
-                addCourseCard(courseCard);
+
+                Course course = new Course(
+                        rs.getString("courseName"),
+                        rs.getString("courseDescription"),
+                        rs.getInt("nbChapters")
+                );
+
+                addCourseCard(new CourseCard(course));
             }
         } catch (SQLException e) {
             e.printStackTrace();

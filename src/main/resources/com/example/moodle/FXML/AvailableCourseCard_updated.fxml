@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pane" onMouseClicked="#handleCourse" style="-fx-cursor: hand; -fx-background-color: transparent;" styleClass="my-btn-class" stylesheets="@../CSS/courseCard.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Teacher.CoursesPanel.AvailableCourseCard.AvailableCourseCardController">
+<Pane fx:id="pane" onMouseClicked="#handleCourseView" style="-fx-cursor: hand; -fx-background-color: transparent;" styleClass="my-btn-class" stylesheets="@../CSS/courseCard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Teacher.CoursesPanel.AvailableCourseCard.AvailableCourseCardController">
    <children>
       <VBox onMouseClicked="#handleCourseView" style="-fx-background-color: fff; -fx-border-radius: 0 0 10 10; -fx-background-radius: 0 0 10 10;">
          <children>
