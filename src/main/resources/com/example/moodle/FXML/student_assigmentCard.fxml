@@ -35,7 +35,7 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="assigmentName" text="Devoir 1">
+                  <Label fx:id="AssigmentName" text="Devoir 1">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -55,7 +55,7 @@
                         <Insets bottom="10.0" left="45.0" top="5.0" />
                      </HBox.margin>
                         </Label>
-                  <Label fx:id="ChaptersNumber1" text="26/06/2024">
+                  <Label fx:id="deadLine" text="26/06/2024">
                      <font>
                         <Font size="14.0" />
                      </font>
