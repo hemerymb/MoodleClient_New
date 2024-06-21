@@ -41,7 +41,7 @@ public class LeftDashboardController implements Initializable{
     private boolean isMenuExpanded = true;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        selectBtn(vbox, Coursesbtn);
     }
 
     @FXML

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -32,12 +33,18 @@ public class AvailableCourseCardController implements Initializable{
     void handleCourseView(MouseEvent event) throws IOException {
         FXMLLoader contentLoader = new FXMLLoader(AvailableCourseCardController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
         AnchorPane content = contentLoader.load();
+        Label name = (Label) contentLoader.getNamespace().get("coursename");
+        TextArea desc = (TextArea) contentLoader.getNamespace().get("courseDescription");
+        name.setText(courseName.getText());
+        desc.setText(courseDesc.getText());
         root.setCenter(content);
     }
 
-    public void setCourseDetails(String name, String description, int chapters) {
+    public void define(String name, String description, int nbchapters) {
         this.courseName.setText(name);
         this.courseDesc.setText(description);
-        // this.ChaptersNumber.setText(String.valueOf(chapters) + " Chapitres");
+        this.courseDesc.setStyle("-fx-text-fill: black");
+        this.ChaptersNumber.setText(nbchapters + " Chapitres");
+        this.ChaptersNumber.setStyle("-fx-text-fill: black");
     }
 }

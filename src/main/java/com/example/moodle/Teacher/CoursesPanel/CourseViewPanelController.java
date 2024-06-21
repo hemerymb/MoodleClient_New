@@ -1,8 +1,10 @@
 package com.example.moodle.Teacher.CoursesPanel;
 
+import com.example.moodle.MainDry.Dry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -18,8 +21,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CourseViewPanelController {
+import static com.example.moodle.moodleclient.Moodleclient.root;
+
+public class CourseViewPanelController implements Initializable {
 
     @FXML
     private Button AssignmentsBtn;
@@ -56,6 +63,12 @@ public class CourseViewPanelController {
 
     @FXML
     private ScrollPane scrollpane;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        selectBtn(leftbtnMenu, ChaptersBtn);
+
+    }
 
     @FXML
     void handleAssignmentsBtn(ActionEvent event) {
@@ -103,6 +116,17 @@ public class CourseViewPanelController {
 
     }
 
+    @FXML
+    void handleReturn(MouseEvent event) {
+        try {
+            FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
+            AnchorPane content = contentLoader.load();
+            root.setCenter(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     void selectBtn(VBox VB, Button button) {
         button.getStyleClass().add("focused");
         for (Node node : VB.getChildren()) {
@@ -114,5 +138,4 @@ public class CourseViewPanelController {
             }
         }
     }
-
 }
