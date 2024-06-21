@@ -25,7 +25,7 @@
                 <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                     <children>
                         <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <Label onMouseClicked="#handleCancelEvent" text="❌" textFill="#ef7d7d">
+                        <Label onMouseClicked="#handleCancel" text="❌" textFill="#ef7d7d">
                             <font>
                                 <Font size="14.0" />
                             </font>

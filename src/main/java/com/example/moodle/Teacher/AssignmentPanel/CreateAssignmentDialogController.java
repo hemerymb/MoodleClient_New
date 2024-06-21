@@ -1,55 +1,57 @@
 package com.example.moodle.Teacher.AssignmentPanel;
 
+import com.example.moodle.dao.AssignmentDAO;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-
-import static com.example.moodle.moodleclient.Moodleclient.root;
+import java.sql.Date;
 
 public class CreateAssignmentDialogController {
+
     @FXML
-    private TextField assignNameTextField;
+    private TextField assignmentNameField;
+
     @FXML
-    private TextField courseNameTextField;
+    private DatePicker createdDatePicker;
+
     @FXML
-    private DatePicker openDatePicker;
+    private DatePicker limitedDatePicker;
+
     @FXML
-    private DatePicker dueDatePicker;
+    private TextField courseNameField;
 
-    public void handleCreate() throws IOException {
-        Stage stage = (Stage) assignNameTextField.getScene().getWindow();
-        stage.close();
+    @FXML
+    private TextField statutField;
 
-        String assignName = assignNameTextField.getText();
-        //String courseName = courseNameTextField.getText();
-        /*
-        FXMLLoader contentLoader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/TeacherAssignmentPanel.fxml"));
-        AnchorPane content = contentLoader.load();
+    @FXML
+    private Button createButton;
 
-        ScrollPane assignSrollPane = (ScrollPane) content.lookup("#assignScrollPane");
-        FXMLLoader assignLoader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/TeacherAssignmentPanel.fxml"));
-        AnchorPane assignCard = assignLoader.load();
+    private boolean assignmentCreated = false;
 
-        assignSrollPane.setContent(assignCard);
+    @FXML
+    private void handleCreate() {
+        String assignmentName = assignmentNameField.getText();
+        Date createdDate = Date.valueOf(createdDatePicker.getValue());
+        Date limitedDate = Date.valueOf(limitedDatePicker.getValue());
+        String courseName = courseNameField.getText();
+        String statut = statutField.getText();
 
-        root.setCenter(content);*/
-    }
+        AssignmentDAO.insertAssignment(assignmentName, createdDate, limitedDate, courseName, statut);
+        assignmentCreated = true;
 
-    public void handleCancel() {
-        Stage stage = (Stage) assignNameTextField.getScene().getWindow();
-        stage.close();
-    }
-
-    public void handleCancelEvent() {
-        Stage stage = (Stage) assignNameTextField.getScene().getWindow();
+        Stage stage = (Stage) createButton.getScene().getWindow();
         stage.close();
     }
 
+    @FXML
+    private void handleCancel() {
+        Stage stage = (Stage) createButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public boolean isAssignmentCreated() {
+        return assignmentCreated;
+    }
 }
