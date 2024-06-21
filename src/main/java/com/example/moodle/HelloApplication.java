@@ -1,6 +1,5 @@
 package com.example.moodle;
 
-import static com.example.moodle.moodleclient.Moodleclient.root;
 import com.example.moodle.MainDry.Dry;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

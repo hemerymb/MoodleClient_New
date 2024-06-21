@@ -11,10 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.AnchorPane;
-
 import static com.example.moodle.moodleclient.Moodleclient.root;
+import javafx.scene.layout.Pane;
 
-public class AvailableCourseCardController implements Initializable{
+
+public class AvailableCourseCardController implements Initializable {
 
     @FXML
     private Label courseDesc;
@@ -22,13 +23,14 @@ public class AvailableCourseCardController implements Initializable{
     @FXML
     private Label courseName;
 
-
-
+    @FXML
+    private Pane pane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
+
 
     @FXML
     void handleCourseView(MouseEvent event) throws IOException {
@@ -43,3 +45,4 @@ public class AvailableCourseCardController implements Initializable{
         // this.ChaptersNumber.setText(String.valueOf(chapters) + " Chapitres");
     }
 }
+

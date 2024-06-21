@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.moodle.Login.HelloController;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-    public class TopDashboardController implements Initializable {
+public class TopDashboardController implements Initializable{
+
 
         @FXML
         private Circle connectionIndic;
@@ -74,6 +74,7 @@ import javafx.stage.Stage;
 
         @FXML
         private Label username;
+
 
 
         @Override
