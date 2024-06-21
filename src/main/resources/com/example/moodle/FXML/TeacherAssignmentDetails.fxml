@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TeacherAssignmentDetailsController">
+   <children>
+      <Pane prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: ORANGE;">
+         <children>
+            <Label fx:id="assignName" layoutX="230.0" layoutY="11.0" text="Assignment name" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label fx:id="modifyLabel" layoutX="414.0" layoutY="66.0" onDragDetected="#handleModify" text="Modify">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="deleteLabel" layoutX="496.0" layoutY="66.0" onDragDetected="#handleDelete" text="Delete">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <VBox layoutY="105.0" prefHeight="359.0" prefWidth="600.0">
+         <children>
+            <VBox minHeight="-Infinity" prefHeight="148.0" prefWidth="600.0">
+               <children>
+                  <Label minHeight="-Infinity" text="Submission status">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <GridPane minHeight="51.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="41.0" layoutY="4.0" text="Open date">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <children>
+                              <Label layoutX="39.0" layoutY="5.0" text="Due date">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <Label fx:id="openDate" layoutX="28.0" layoutY="6.0" text="Sunday, 28 November 2021, 12:00 AM" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Label fx:id="DueDate" layoutX="28.0" layoutY="5.0" text="Sunday, 28 November 2021, 12:00 AM" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </GridPane>
+                  <HBox minHeight="-Infinity" prefHeight="50.0" prefWidth="600.0">
+                     <children>
+                        <Button fx:id="viewSubmissionBtn" mnemonicParsing="false" onAction="#handleViewSubmission" prefHeight="29.0" prefWidth="162.0" style="-fx-background-color: ORANGE;" text="View all submission" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="130.0" right="40.0" top="7.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="gradleBtn" mnemonicParsing="false" onAction="#handleGradle" style="-fx-background-color: ORANGE;" text="Grade" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="40.0" right="150.0" top="7.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </VBox>
+            <AnchorPane minHeight="-Infinity" prefHeight="275.0" prefWidth="600.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <ScrollPane layoutX="-1.0" layoutY="-5.0" prefHeight="275.0" prefWidth="600.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

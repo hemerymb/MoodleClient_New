@@ -45,8 +45,12 @@ public class LeftDashboardController implements Initializable{
     }
 
     @FXML
-    void handleAssignmentsbtn(ActionEvent event) {
+    void handleAssignmentsbtn(ActionEvent event) throws IOException {
         selectBtn(vbox, Assignmentsbtn);
+
+        FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/TeacherAssignmentPanel.fxml"));
+        AnchorPane content = contentLoader.load();
+        root.setCenter(content);
 
     }
 

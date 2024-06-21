@@ -10,14 +10,14 @@ import javafx.scene.layout.BorderPane;
 
 public class Dry {
     public static FXMLLoader contentLoader;
-    public Dry(){
-        
-    }
-    
-    public static void showDashboard(BorderPane root, boolean isTeacher) throws IOException{
-        if(isTeacher) {
-            FXMLLoader loader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/topDashboard_updated.fxml"));
 
+    public Dry() {
+
+    }
+
+    public static void showDashboard(BorderPane root, boolean isTeacher) throws IOException {
+        if (isTeacher) {
+            FXMLLoader loader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/topDashboard_updated.fxml"));
 
 
             AnchorPane topMenu = loader.load();
@@ -59,6 +59,8 @@ public class Dry {
             AnchorPane content = contentLoader.load();
             root.setCenter(content);
         }
+    }
+}
 
 
 
@@ -69,10 +71,10 @@ public class Dry {
         // root.setRight(rightMenu);
         
         //Le leftMenu se charge de mettre à jour le contenu central donc, plus besoin de ceci.
+
        // FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
         //AnchorPane content = contentLoader.load();
         //root.setCenter(content);
 
-    }
 
-}
+
