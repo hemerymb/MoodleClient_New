@@ -72,7 +72,7 @@
             </AnchorPane>
          </center>
          <top>
-            <StackPane maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="476.0">
+            <StackPane maxWidth="1.7976931348623157E308" prefHeight="36.0">
                <children>
                   <HBox alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" prefHeight="100.0">
                      <children>
