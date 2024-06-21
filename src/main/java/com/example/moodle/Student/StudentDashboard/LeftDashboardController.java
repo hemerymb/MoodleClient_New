@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.example.moodle.Login.HelloController;
+import static com.example.moodle.moodleclient.Moodleclient.root;
 import com.example.moodle.MainDry.Dry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,7 +42,7 @@ public class LeftDashboardController implements Initializable{
         try {
             FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/student_CoursesPanel_updated.fxml"));
             AnchorPane content = contentLoader.load();
-            HelloController.root.setCenter(content);
+            root.setCenter(content);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +58,7 @@ public class LeftDashboardController implements Initializable{
         try {
             FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/student_Novelties_updated.fxml"));
             AnchorPane content = contentLoader.load();
-            HelloController.root.setCenter(content);
+            root.setCenter(content);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,7 +70,7 @@ public class LeftDashboardController implements Initializable{
         try {
             FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/student_PrivatesFiles_updated.fxml"));
             AnchorPane content = contentLoader.load();
-            HelloController.root.setCenter(content);
+            root.setCenter(content);
         } catch (IOException e) {
             e.printStackTrace();
         }

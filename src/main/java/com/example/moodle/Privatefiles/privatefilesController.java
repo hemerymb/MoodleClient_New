@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
+import com.example.moodle.dao.PrivateFilesDAO;
+
 
 public class privatefilesController {
 
@@ -33,6 +35,7 @@ public class privatefilesController {
         });
 
         fileListView.setOnMouseClicked(this::handleFileClick);
+        loadPrivateFilesFromDatabase(); // Load private files from database when the application starts
     }
 
     @FXML
@@ -51,10 +54,16 @@ public class privatefilesController {
         if (selectedFiles != null) {
             for (File file : selectedFiles) {
                 String fileName = file.getName();
-                String fileSize = readableFileSize(file.length());
+                long fileSize = file.length();
+                String readableFileSize = readableFileSize(fileSize);
                 String fileType = getFileType(file);
                 String filePath = file.getAbsolutePath();
-                fileListView.getItems().add(new filesdetails(fileName, fileSize, fileType, filePath));
+
+                // Insert the file into the database
+                PrivateFilesDAO.insertPrivateFile(fileName, fileSize, fileType, filePath);
+
+                // Add the file to the ListView
+                fileListView.getItems().add(new filesdetails(fileName, readableFileSize, fileType, filePath));
             }
         }
     }
@@ -84,7 +93,7 @@ public class privatefilesController {
         if (event.getClickCount() == 2) {
             filesdetails selectedFileItem = fileListView.getSelectionModel().getSelectedItem();
             if (selectedFileItem != null) {
-                openFile(selectedFileItem.getPath());
+                openFile(selectedFileItem.getFilePath());
             }
         }
     }
@@ -97,6 +106,19 @@ public class privatefilesController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void loadPrivateFilesFromDatabase() {
+        List<PrivateFile> privateFiles = PrivateFilesDAO.readPrivateFiles();
+        for (PrivateFile privateFile : privateFiles) {
+            String readableFileSize = readableFileSize(privateFile.getFileSize());
+            fileListView.getItems().add(new filesdetails(
+                    privateFile.getFileName(),
+                    readableFileSize,
+                    privateFile.getFileType(),
+                    privateFile.getFilePath()
+            ));
         }
     }
 }

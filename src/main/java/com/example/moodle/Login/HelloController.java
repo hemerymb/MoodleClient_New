@@ -1,5 +1,7 @@
 package com.example.moodle.Login;
 
+import static com.example.moodle.moodleclient.Moodleclient.root;
+
 import com.example.moodle.DBConnection;
 import com.example.moodle.HelloApplication;
 import com.example.moodle.MainDry.Dry;
@@ -136,8 +138,6 @@ public class HelloController implements Initializable {
 
     @FXML
     private JFXButton ButonSignIn1;
-
-    public static BorderPane root;
 
     public static boolean isTeacher;
 
