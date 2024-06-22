@@ -17,6 +17,7 @@ public class StudentCourseView extends Pane {
             this.pane = loader.load();
             StudentCourseViewController controller = loader.getController();
             controller.define(course.getCourseName(), course.getCourseDescription());
+            controller.setCourse(course);
             getChildren().add(this.pane);
         } catch (IOException e) {
             e.printStackTrace();

@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Chapters (
     num INT,
     content VARCHAR(255),
     courseId INT,
-    FOREIGN KEY (courseId) REFERENCES Users(id)
+    FOREIGN KEY (courseId) REFERENCES Course(id)
 );
 
 CREATE TABLE IF NOT EXISTS assignments (
