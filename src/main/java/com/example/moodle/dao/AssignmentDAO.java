@@ -9,7 +9,7 @@ public class AssignmentDAO {
 
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/moodleclient";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "681503533";
 
     public static void main(String[] args) {
         try {

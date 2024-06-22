@@ -106,6 +106,28 @@
                            </padding>
                         </Label>
                         <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="EditCourse" minWidth="-Infinity" onMouseClicked="#handleEditCourse" style="-fx-background-color: #337acc; -fx-background-radius: 50;" text="🖍 Edit" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets bottom="2.0" right="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="deleteCourse" minWidth="-Infinity" onMouseClicked="#handleDeleteCourse" style="-fx-background-color: #d75c5c; -fx-background-radius: 50;" text="❌ Delete" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets bottom="2.0" right="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+                           </padding>
+                        </Label>
                      </children>
                   </HBox>
                </children>

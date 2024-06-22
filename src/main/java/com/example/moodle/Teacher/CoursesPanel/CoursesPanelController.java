@@ -89,7 +89,7 @@ public class CoursesPanelController implements Initializable {
             gridpane.add(card, col, row);
             col++;
 
-            int columns = 4;//(int) Math.floor(scrollpane.getWidth() / 100);
+            int columns = 4; //(int) Math.floor(scrollpane.getPrefWidth() / 10);
             if (col >= columns) {
                 col = 0;
                 row++;
@@ -127,9 +127,12 @@ public class CoursesPanelController implements Initializable {
             while (rs.next()) {
 
                 Course course = new Course(
+                        rs.getInt("id"),
                         rs.getString("courseName"),
+                        rs.getString("courseAbr"),
                         rs.getString("courseDescription"),
-                        rs.getInt("nbChapters")
+                        rs.getInt("nbChapters"),
+                        rs.getInt("nbAssignments")
                 );
 
                 addCourseCard(new CourseCard(course));
@@ -139,11 +142,7 @@ public class CoursesPanelController implements Initializable {
         }
     }
 
-    private Pane createCourseCard(String courseName) {
-        Pane courseCard = new Pane();
-        Label label = new Label(courseName);
-        courseCard.getChildren().add(label);
-        // Customize the course card pane as needed
-        return courseCard;
+    public int getCoursesCount() {
+        return list.size();
     }
 }

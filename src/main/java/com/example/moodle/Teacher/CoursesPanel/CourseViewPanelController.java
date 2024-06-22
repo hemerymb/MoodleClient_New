@@ -1,6 +1,7 @@
 package com.example.moodle.Teacher.CoursesPanel;
 
 import com.example.moodle.MainDry.Dry;
+import com.example.moodle.Teacher.entity.Course;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 import static com.example.moodle.moodleclient.Moodleclient.root;
@@ -64,9 +66,37 @@ public class CourseViewPanelController implements Initializable {
     @FXML
     private ScrollPane scrollpane;
 
+    private Course course;
+
+    private Connection connect() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/moodleclient";
+        String user = "root";
+        String password = "681503533";
+        return DriverManager.getConnection(url, user, password);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         selectBtn(leftbtnMenu, ChaptersBtn);
+
+        String query = "SELECT * FROM Course";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+
+                course = new Course(
+                        rs.getInt("id"),
+                        rs.getString("courseName"),
+                        rs.getString("courseAbr"),
+                        rs.getString("courseDescription"),
+                        rs.getInt("nbChapters"),
+                        rs.getInt("nbAssignments")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -125,6 +155,10 @@ public class CourseViewPanelController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Course getCourse(){
+        return course;
     }
 
     void selectBtn(VBox VB, Button button) {
