@@ -42,13 +42,13 @@ public class studentAssigmentController {
         ArrayList<Assigment> assigments = new ArrayList<>();
         assigments.add(new Assigment("Architecture des ordinateurs","Devoir 1", "inProgress",new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
         assigments.add(new Assigment("Réseaux mobiles et intelligents", "Devoir 1","inProgress", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
-        assigments.add(new Assigment("Management", "inProgress","Devoir 1", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
-        assigments.add(new Assigment("Systèmes multi-agents", "finished","Devoir 1", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
-        assigments.add(new Assigment("Analyse numérique", "finished","Devoir 1", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
-        assigments.add(new Assigment("Systèmes formels", "finished","Devoir 1", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
+        assigments.add(new Assigment("Management", "Devoir 1","inProgress", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
+        assigments.add(new Assigment("Systèmes multi-agents", "Devoir 1","finished", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
+        assigments.add(new Assigment("Analyse numérique", "Devoir 1","finished", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
+        assigments.add(new Assigment("Systèmes formels", "Devoir 1","finished", new Date(2024, 6, 26, 12, 30, 0), new Date(2024, 4, 12, 12, 30, 0)));
 
         int count = 0;
-        for(int i = 0; i < (int)Math.ceil((assigments.size() / 4.0)); i++) {
+        for(int i = 0; i < (int)Math.ceil(assigments.size()); i++) {
             assigmentList.getChildren().add(i, new AssigmentCard(assigments.get(count)));
             count++;
         }

@@ -1,10 +1,15 @@
 package com.example.moodle.Student.studentAssigmentPanel;
 
+import com.example.moodle.Login.HelloController;
+import com.example.moodle.MainDry.Dry;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class studentAssigmentCardController {
@@ -35,8 +40,15 @@ public class studentAssigmentCardController {
     }
 
     @FXML
-    void handleCourse(MouseEvent event) {
-        System.out.println("Yo");
+    void handleAssigment(MouseEvent event) {
+        try {
+            FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/student_assigmentViewPanel.fxml"));
+            AnchorPane content = contentLoader.load();
+            HelloController.root.setCenter(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 }
