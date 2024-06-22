@@ -11,10 +11,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.example.moodle.moodleclient.Moodleclient.root;
 
 public class CreateCourseDialogController implements Initializable {
 
@@ -49,15 +52,19 @@ public class CreateCourseDialogController implements Initializable {
             System.out.println("Course created successfully.");
 
             FXMLLoader coursesloader = new FXMLLoader(CreateCourseDialogController.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
-            coursesloader.load();
+            AnchorPane courses = coursesloader.load();
+
             CoursesPanelController CourseCtrler = coursesloader.getController();
             CourseCtrler.addCourseCard(new CourseCard(new Course(
+                    CourseCtrler.getCoursesCount(),
                     namefield.getText(),
+                    shortnamefield.getText(),
                     descriptionfield.getText(),
-                    0
+                    nbChapters,
+                    nbAssignments
             )));
 
-
+            root.setCenter(courses);
 
         } catch (Exception e) {
             e.printStackTrace();

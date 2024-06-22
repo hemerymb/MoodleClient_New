@@ -1,14 +1,28 @@
 package com.example.moodle.Teacher.entity;
 
 public class Course {
+    private int id;
     private String courseName;
-    private String description;
+    private String courseAbr;
+    private String courseDescription;
     private int nbChapters;
+    private int nbAssignments;
 
-    public Course(String courseName, String description, int nbChapters) {
+    public Course(int id, String courseName, String courseAbr, String courseDescription, int nbChapters, int nbAssignments) {
+        this.id = id;
         this.courseName = courseName;
-        this.description = description;
+        this.courseAbr = courseAbr;
+        this.courseDescription = courseDescription;
         this.nbChapters = nbChapters;
+        this.nbAssignments = nbAssignments;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCourseName() {
@@ -19,12 +33,20 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCourseAbr() {
+        return courseAbr;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCourseAbr(String courseAbr) {
+        this.courseAbr = courseAbr;
+    }
+
+    public String getCourseDescription() {
+        return courseDescription;
+    }
+
+    public void setCourseDescription(String courseDescription) {
+        this.courseDescription = courseDescription;
     }
 
     public int getNbChapters() {
@@ -33,5 +55,13 @@ public class Course {
 
     public void setNbChapters(int nbChapters) {
         this.nbChapters = nbChapters;
+    }
+
+    public int getNbAssignments() {
+        return nbAssignments;
+    }
+
+    public void setNbAssignments(int nbAssignments) {
+        this.nbAssignments = nbAssignments;
     }
 }
