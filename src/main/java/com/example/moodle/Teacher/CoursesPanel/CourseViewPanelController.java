@@ -149,7 +149,7 @@ public class CourseViewPanelController implements Initializable {
     @FXML
     void handleReturn(MouseEvent event) {
         try {
-            FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
+            FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursePanel_updated.fxml"));
             AnchorPane content = contentLoader.load();
             root.setCenter(content);
         } catch (IOException e) {
