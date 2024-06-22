@@ -53,7 +53,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </GridPane.margin></TextField>
                         <Label fx:id="courseNameLabel" text="Course name" GridPane.rowIndex="1" />
-                        <TextField fx:id="courseNameTextfiel" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="courseNameTextField" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </GridPane.margin></TextField>

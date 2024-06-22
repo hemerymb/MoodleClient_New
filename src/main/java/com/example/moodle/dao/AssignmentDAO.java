@@ -1,7 +1,9 @@
 package com.example.moodle.dao;
 
+
 import com.example.moodle.DBConnection;
 import com.example.moodle.Teacher.AssignmentPanel.Assignment;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class AssignmentDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Insérer un devoir
-            insertAssignment("Assignment 1", Date.valueOf("2024-06-21"), Date.valueOf("2024-06-30"), "Course 1");
+            insertAssignment("Assignment 1", Date.valueOf("2024-06-21"), Date.valueOf("2024-06-30"), "Course 1", statut);
 
             // Lire tous les devoirs
             readAssignments();
@@ -44,7 +46,7 @@ public class AssignmentDAO {
     }
 
     // Méthode pour insérer un devoir
-    public static void insertAssignment(String assignmentName, Date createdDate, Date limitedDate, String courseName) {
+    public static void insertAssignment(String assignmentName, Date createdDate, Date limitedDate, String courseName, String statut) {
         String query = "INSERT INTO assignments (assignmentName, createdDate, limitedDate, courseName, statut) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
 
@@ -60,6 +62,7 @@ public class AssignmentDAO {
             e.printStackTrace();
         }
     }
+
 
     public static List<Assignment> readAssignments() {
         List<Assignment> assignments = new ArrayList<>();
@@ -82,6 +85,7 @@ public class AssignmentDAO {
             e.printStackTrace();
         }
         return assignments;
+
     }
     // Méthode pour mettre à jour un devoir
     public static void updateAssignment(int id, String assignmentName, Date createdDate, Date limitedDate, String courseName, String statut) {

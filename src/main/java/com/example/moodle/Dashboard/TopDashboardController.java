@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import com.example.moodle.HelloApplication;
 import com.example.moodle.Login.HelloController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,8 +33,8 @@ import static com.example.moodle.moodleclient.Moodleclient.user;
 
 
 
-public class TopDashboardController implements Initializable{
 
+public class TopDashboardController implements Initializable{
 
         @FXML
         private Circle connectionIndic;

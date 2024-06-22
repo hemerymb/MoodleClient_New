@@ -1,13 +1,11 @@
 package com.example.moodle.MainDry;
 
-import java.io.IOException;
-
-import com.example.moodle.Dashboard.TopDashboardController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 public class Dry {
     public static FXMLLoader contentLoader;
 
@@ -18,8 +16,6 @@ public class Dry {
     public static void showDashboard(BorderPane root, boolean isTeacher) throws IOException {
         if (isTeacher) {
             FXMLLoader loader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/topDashboard_updated.fxml"));
-
-
             AnchorPane topMenu = loader.load();
 
             Label username = (Label) loader.getNamespace().get("username");
@@ -89,6 +85,12 @@ public class Dry {
        // FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
         //AnchorPane content = contentLoader.load();
         //root.setCenter(content);
+
+       /* FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/CoursePanel_updated.fxml"));
+
+        AnchorPane content = contentLoader.load();
+        root.setCenter(content);*/
+
 
 
 

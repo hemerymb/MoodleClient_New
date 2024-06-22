@@ -1,5 +1,6 @@
 package com.example.moodle.Teacher.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +15,12 @@ public class Assignment<Cours> {
     private String remoteId;
     private Date createdAt;
     private Date updatedAt;
+
+    //Modification made by Stefy237
+    private String assignName;
+    private String courseName;
+    private LocalDate openDate;
+    private LocalDate dueDate;
     private Integer note = null; // la note obtenue
     private Integer noteMax = null; // sur combien est noté le devoir
     private Byte noteVue = 0; // l'étudiant a vu sa note (1) ou pas (0)
@@ -22,14 +29,14 @@ public class Assignment<Cours> {
     private Set assignmentSubmissions = new HashSet(0);
     private Integer id;
 
-    public void Devoirs() {
+    public Assignment() {
     }
 
-    public void Devoirs(String remoteId) {
+    public void Assignment(String remoteId) {
         this.remoteId = remoteId;
     }
 
-    public void Devoirs(Cours cours, String enonce, Date dateLimite, String etat, String remoteId, Date createdAt, Date updatedAt, Set ressourceDevoirs, Set assignmentSubmissions) {
+    public void Assignment(Cours cours, String enonce, Date dateLimite, String etat, String remoteId, Date createdAt, Date updatedAt, Set ressourceDevoirs, Set assignmentSubmissions) {
        this.cours = cours;
        this.enonce = enonce;
        this.dateLimite = dateLimite;
@@ -41,6 +48,25 @@ public class Assignment<Cours> {
        this.assignmentSubmissions = assignmentSubmissions;
     }
 
+    public Assignment(String assignName, String courseName, LocalDate openDate, LocalDate dueDate) {
+        this.assignName = assignName;
+        this.courseName = courseName;
+        this.openDate = openDate;
+        this.dueDate = dueDate;
+    }
+
+    public String getAssignName() {
+        return this.assignName;
+    }
+    public String getCourseName() {
+        return this.courseName;
+    }
+    public LocalDate getOpenDate() {
+        return this.openDate;
+    }
+    public LocalDate getDueDate() {
+        return this.dueDate;
+    }
     public Integer getId() {
         return this.id;
     }
