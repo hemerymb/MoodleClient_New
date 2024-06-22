@@ -67,12 +67,12 @@ public class CreateAssignmentDialogController {
         LocalDate dueLocalDate = dueDatePicker.getValue();
         Date dueDate = Date.valueOf(dueLocalDate);
 
-        if(assignName.isEmpty() || courseName.isEmpty() || openDate.equals(null) || dueDate.equals(null)) {
+        if (assignName.isEmpty() || courseName.isEmpty() || openDate.equals(null) || dueDate.equals(null)) {
             System.out.println("All fields must be filled out!");
         }
 
         String statut = "in progress";
-        if(dueLocalDate.equals(LocalDate.now())) {
+        if (dueLocalDate.equals(LocalDate.now())) {
             statut = "";
         }
         try {
@@ -96,6 +96,12 @@ public class CreateAssignmentDialogController {
 
         Stage stage = (Stage) assignNameTextField.getScene().getWindow();
         stage.close();
+    }
+        @FXML
+        private void handleCancel() {
+            Stage stage1 = (Stage) cancelBtn.getScene().getWindow();
+            stage1.close();
+        };
 
         /*
         FXMLLoader contentLoader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/TeacherAssignmentPanel.fxml"));
@@ -143,4 +149,3 @@ public class CreateAssignmentDialogController {
     }
 }
 */}
-}

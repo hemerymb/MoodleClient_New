@@ -67,4 +67,7 @@ public class Assignment {
         this.statut = statut;
     }
 
+    public String getAssignmentName() {
+        return null;
+    }
 }

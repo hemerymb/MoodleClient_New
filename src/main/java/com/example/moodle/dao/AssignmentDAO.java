@@ -23,7 +23,7 @@ public class AssignmentDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Insérer un devoir
-            insertAssignment("Assignment 1", Date.valueOf("2024-06-21"), Date.valueOf("2024-06-30"), "Course 1", statut);
+            insertAssignment("Assignment 1", Date.valueOf("2024-06-21"), Date.valueOf("2024-06-30"), "Course 1", "in progress");
 
             // Lire tous les devoirs
             readAssignments();
