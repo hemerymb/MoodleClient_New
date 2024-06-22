@@ -2,36 +2,42 @@ package com.example.moodle.Student.StudentPrivateFiles;
 
 
 public class filesdetails {
-    private String name;
-    private long size;
-    private String type;
-    private String path;
+    private static String fileName;
+    private String fileSize;
+    private String fileType;
+    private String filePath;
+    private String readableFileSize;
 
-    public filesdetails(String name, long size, String type, String path) {
-        this.name = name;
-        this.size = size;
-        this.type = type;
-        this.path = path;
+    public filesdetails(String fileName, String fileType, String filePath, String readableFileSize) {
+        this.fileName = fileName;
+        this.fileSize = fileSize;
+        this.fileType = fileType;
+        this.filePath = filePath;
+        this.readableFileSize = readableFileSize;
     }
 
-    public String getName() {
-        return name;
+    public static String getfileName() {
+        return fileName;
     }
 
-    public long getSize() {
-        return size;
+    public String getfileSize() {
+        return fileSize;
     }
 
-    public String getType() {
-        return type;
+    public String getfileType() {
+        return fileType;
     }
 
-    public String getPath() {
-        return path;
+    public String getfilePath() {
+        return filePath;
+    }
+
+    public String getReadableFileSize() {
+        return readableFileSize;
     }
 
     @Override
     public String toString() {
-        return String.format("%-20s %-10d %-10s %-40s", name, size, type, path);
+        return String.format("%-20s %-10d %-10s %-40s", fileName, fileSize, fileType, filePath);
     }
 }
