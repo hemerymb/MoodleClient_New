@@ -8,16 +8,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="510.0" minWidth="510.0" style="-fx-background-color: fff;" stylesheets="@../CSS/CourseViewPanel.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Student.StudentCoursesPanel.StudentCourseViewController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="510.0" prefWidth="510.0" style="-fx-background-color: fff;" stylesheets="@../CSS/CourseViewPanel.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Student.StudentCoursesPanel.StudentCourseViewController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: e2e2e2; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -28,7 +26,7 @@
                <children>
                   <VBox layoutX="1.0" layoutY="-13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" style="-fx-background-color: #fff0;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ScrollPane fx:id="scrollpane" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="378.0" style="-fx-background: transparent; -fx-background-color: fff; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
+                        <ScrollPane fx:id="scrollpane" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background: transparent; -fx-background-color: fff; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
                            <padding>
                               <Insets left="5.0" right="5.0" />
                            </padding>
@@ -51,11 +49,11 @@
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                     </TextArea>
-                                    <GridPane fx:id="gridpane" prefHeight="0.0" prefWidth="0.0">
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
+                                    <ScrollPane hbarPolicy="NEVER" style="-fx-background-color: white;">
+                                       <content>
+                                          <VBox fx:id="vboxChapters" prefHeight="354.0" prefWidth="368.0" />
+                                       </content>
+                                    </ScrollPane>
                                  </children>
                                  <padding>
                                     <Insets top="5.0" />
@@ -122,21 +120,33 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="ParticipantsBtn" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleParticipantsBtn" styleClass="button-menu" text="Participants">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="AssignmentsBtn" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAssignmentsBtn" styleClass="button-menu" text="Assignments">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="CourseFilesBtn" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleCourseFilesBtn" styleClass="button-menu" text="Files">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
                <BorderPane.margin>

@@ -1,6 +1,10 @@
 package com.example.moodle.Student.StudentCoursesPanel;
 
 import com.example.moodle.MainDry.Dry;
+import com.example.moodle.Student.Cards.ChapTile;
+import com.example.moodle.Student.Entities.Chapter;
+import com.example.moodle.Student.Entities.Course;
+import com.example.moodle.dao.ChaptersDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static com.example.moodle.moodleclient.Moodleclient.root;
 
@@ -49,23 +54,34 @@ public class StudentCourseViewController {
     private ScrollPane scrollpane;
 
     @FXML
-    void handleAssignmentsBtn(ActionEvent event) {
+    private VBox vboxChapters;
 
+    private Course course;
+
+    @FXML
+    void handleAssignmentsBtn(ActionEvent event) {
+        vboxChapters.getChildren().clear();
     }
 
     @FXML
     void handleChaptersBtn(ActionEvent event) {
-
+        if(vboxChapters.getChildren().isEmpty()) {
+            ArrayList<Chapter> chapters = ChaptersDAO.getChapters(course.getId());
+            for(Chapter chapter: chapters) {
+                ChapTile chapTile = new ChapTile(chapter);
+                vboxChapters.getChildren().add(chapTile);
+            }
+        }
     }
 
     @FXML
     void handleCourseFilesBtn(ActionEvent event) {
-
+        vboxChapters.getChildren().clear();
     }
 
     @FXML
     void handleParticipantsBtn(ActionEvent event) {
-
+        vboxChapters.getChildren().clear();
     }
 
     @FXML
@@ -82,5 +98,13 @@ public class StudentCourseViewController {
     public void define(String name, String desc) {
         coursename.setText(name);
         courseDescription.setText(desc);
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
