@@ -38,6 +38,7 @@ public class privatefilesController {
         loadPrivateFilesFromDatabase(); // Load private files from database when the application starts
     }
 
+
     @FXML
     private void onButtonClicked(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();

@@ -1,22 +1,23 @@
 package com.example.moodle.Student.StudentPrivateFiles;
 
+import com.example.moodle.Student.StudentPrivateFiles.PrivateFile1;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
+import java.text.DecimalFormat;
+import javafx.util.Callback;
 
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
+import com.example.moodle.dao.PrivateFilesDAO;
 
 
 public class StudentPrivateFilesController {
@@ -38,7 +39,15 @@ public class StudentPrivateFilesController {
 
     @FXML
     private void initialize() {
-        fileListView.setOnMouseClicked(event -> handleFileClick(event));
+        fileListView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<com.example.moodle.Student.StudentPrivateFiles.filesdetails> call(ListView<com.example.moodle.Student.StudentPrivateFiles.filesdetails> param) {
+                return new FileItemCell();
+            }
+        });
+
+        fileListView.setOnMouseClicked(this::handleFileClick);
+        loadPrivateFilesFromDatabase(); // Load private files from database when the application starts
     }
 
 
@@ -59,11 +68,13 @@ public class StudentPrivateFilesController {
             for (File file : selectedFiles) {
                 String fileName = file.getName();
                 long fileSize = file.length();
+                String readableFileSize = readableFileSize(fileSize);
                 String filePath = file.getAbsolutePath();
                 String fileType = determineFileType(fileChooser, file);
 
-                filesdetails fileItem = new filesdetails(fileName, fileSize, fileType, filePath);
-                fileListView.getItems().add(fileItem);
+                PrivateFilesDAO.insertPrivateFile(fileName, fileSize, fileType, filePath);
+
+                fileListView.getItems().add(new com.example.moodle.Student.StudentPrivateFiles.filesdetails(fileName, fileType, filePath, readableFileSize));
             }
         }
     }
@@ -79,12 +90,20 @@ public class StudentPrivateFilesController {
         return "Unknown";
     }
 
+    private String readableFileSize(long size) {
+        if (size <= 0) return "0 B";
+        final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+
+
     @FXML
     private void handleFileClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             filesdetails selectedFileItem = fileListView.getSelectionModel().getSelectedItem();
             if (selectedFileItem != null) {
-                openFile(selectedFileItem.getPath());
+                openFile(selectedFileItem.getfilePath());
             }
         }
     }
@@ -99,5 +118,19 @@ public class StudentPrivateFilesController {
             }
         }
     }
+
+    private void loadPrivateFilesFromDatabase() {
+        List<PrivateFile1> privateFiles = PrivateFilesDAO.readPrivateFiles1();
+        for (PrivateFile1 privateFile : privateFiles) {
+            String readableFileSize = readableFileSize(privateFile.getFileSize());
+            fileListView.getItems().add(new com.example.moodle.Student.StudentPrivateFiles.filesdetails(
+                    privateFile.getFileName(),
+                    readableFileSize,
+                    privateFile.getFileType(),
+                    privateFile.getFilePath()
+            ));
+        }
+    }
+
 
 }

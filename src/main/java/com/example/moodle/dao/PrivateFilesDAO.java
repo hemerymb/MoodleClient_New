@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.moodle.Privatefiles.PrivateFile;
+import com.example.moodle.Student.StudentPrivateFiles.PrivateFile1;
 
 
 public class PrivateFilesDAO {
@@ -21,7 +22,7 @@ public class PrivateFilesDAO {
             insertPrivateFile("file1.txt", 1024, "text/plain", "/path/to/file1.txt");
 
             // Lire tous les fichiers privés
-            readPrivateFiles();
+            readPrivateFiles1();
 
             // Mettre à jour un fichier
             updatePrivateFile(1, "file2.txt", 2048, "text/plain", "/path/to/file2.txt");
@@ -74,6 +75,26 @@ public class PrivateFilesDAO {
             e.printStackTrace();
         }
         return privateFiles;
+    }
+
+    public static List<PrivateFile1> readPrivateFiles1() {
+        List<PrivateFile1> privateFiles1 = new ArrayList<>();
+        String query = "SELECT * FROM private_files";
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String fileName = resultSet.getString("fileName");
+                long fileSize = resultSet.getLong("fileSize");
+                String fileType = resultSet.getString("fileType");
+                String filePath = resultSet.getString("filePath");
+                privateFiles1.add(new PrivateFile1(id, fileName, fileSize, fileType, filePath));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return privateFiles1;
     }
     // Méthode pour mettre à jour un fichier privé
     public static void updatePrivateFile(int id, String fileName, long fileSize, String fileType, String filePath) {
