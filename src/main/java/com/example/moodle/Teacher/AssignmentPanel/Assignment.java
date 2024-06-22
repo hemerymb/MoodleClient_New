@@ -1,10 +1,11 @@
 package com.example.moodle.Teacher.AssignmentPanel;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Assignment {
     private int id;
-    private String assignmentName;
+    private String assignName;
     private Date createdDate;
     private Date limitedDate;
     private String courseName;
@@ -13,13 +14,16 @@ public class Assignment {
     public Assignment(int id, String assignmentName, Date createdDate, Date limitedDate, String courseName) {
     }
 
+    public Assignment(String assignName, Object courseName, LocalDate openLocalDate, LocalDate dueLocalDate) {
+    }
+
     // Getters
     public int getId() {
         return id;
     }
 
-    public String getAssignmentName() {
-        return assignmentName;
+    public String getAssignName() {
+        return assignName;
     }
 
     public Date getCreatedDate() {
@@ -44,7 +48,7 @@ public class Assignment {
     }
 
     public void setAssignmentName(String assignmentName) {
-        this.assignmentName = assignmentName;
+        this.assignName = assignmentName;
     }
 
     public void setCreatedDate(Date createdDate) {
@@ -62,4 +66,5 @@ public class Assignment {
     public void setStatut(String statut) {
         this.statut = statut;
     }
+
 }
