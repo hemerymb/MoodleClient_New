@@ -19,8 +19,19 @@ public class ChapterCardController implements Initializable {
     @FXML
     private Label chapterName;
 
+    @FXML
+    private Label chapterNum;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void define(String name, String num, int nbfichiers) {
+        this.chapterName.setText(name);
+        this.chapterNum.setText(num);
+        this.chapterNum.setStyle("-fx-text-fill: black");
+        this.FilesNumber.setText(nbfichiers+"");
+        this.FilesNumber.setStyle("-fx-text-fill: black");
     }
 }

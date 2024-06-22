@@ -8,14 +8,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane style="-fx-background-color: fff; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Teacher.CoursesPanel.ChapterCard.ChapterCardController">
    <children>
       <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <HBox maxWidth="1.7976931348623157E308" style="-fx-border-width: 0 0 1 0; -fx-border-color: black;">
                <children>
-                  <Label fx:id="chapterName" text="Chapter Name">
+                  <Label minWidth="-Infinity" text="Chapter">
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="chapterNum" text="##">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="chapterName" minWidth="-Infinity" text="Name">
                      <padding>
                         <Insets right="20.0" />
                      </padding>

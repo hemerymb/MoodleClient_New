@@ -7,10 +7,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -50,11 +48,27 @@
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                     </TextArea>
-                                    <GridPane fx:id="gridpane" prefHeight="0.0" prefWidth="0.0">
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
+                                    <Text fill="#000000af" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Chapitres">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="5.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <VBox>
+                                       <children>
+                                          <VBox fx:id="ChaptersVbox" />
+                                          <Button fx:id="newChapBtn" mnemonicParsing="false" onAction="#handleCreateChapter" style="-fx-background-color: #ffa84b;" text="➕ New Chapter" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="5.0" />
+                                       </VBox.margin>
+                                    </VBox>
                                  </children>
                                  <padding>
                                     <Insets top="5.0" />
@@ -106,26 +120,26 @@
                            </padding>
                         </Label>
                         <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="EditCourse" minWidth="-Infinity" onMouseClicked="#handleEditCourse" style="-fx-background-color: #337acc; -fx-background-radius: 50;" text="🖍 Edit" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets bottom="2.0" right="10.0" />
-                           </HBox.margin>
+                        <Label fx:id="EditCourse" onMouseClicked="#handleEditCourse" style="-fx-background-radius: 50; -fx-background-color: #3382c7;" text="🖍 Edit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
                            <padding>
-                              <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+                              <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="deleteCourse" minWidth="-Infinity" onMouseClicked="#handleDeleteCourse" style="-fx-background-color: #d75c5c; -fx-background-radius: 50;" text="❌ Delete" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets bottom="2.0" right="10.0" />
-                           </HBox.margin>
+                        <Label fx:id="deleteCourse" onMouseClicked="#handleDeleteCourse" style="-fx-background-radius: 50; -fx-background-color: #ef7171;" text="❌ Delete" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets left="5.0" right="10.0" top="5.0" />
+                           </HBox.margin>
                            <padding>
-                              <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+                              <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
                            </padding>
                         </Label>
                      </children>
