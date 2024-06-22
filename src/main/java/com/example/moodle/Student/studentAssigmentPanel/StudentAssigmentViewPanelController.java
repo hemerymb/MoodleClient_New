@@ -12,6 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import static com.example.moodle.moodleclient.Moodleclient.root;
 
 import java.awt.*;
 import java.io.File;
@@ -105,7 +106,7 @@ public class StudentAssigmentViewPanelController {
         try {
             FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/student_assigmentPanel_updated.fxml"));
             AnchorPane content = contentLoader.load();
-            HelloController.root.setCenter(content);
+            root.setCenter(content);
         } catch (IOException e) {
             e.printStackTrace();
         }

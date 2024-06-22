@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.Date;
+import static com.example.moodle.moodleclient.Moodleclient.root;
 
 public class studentAssigmentCardController {
 
@@ -44,7 +45,7 @@ public class studentAssigmentCardController {
         try {
             FXMLLoader contentLoader = new FXMLLoader(Dry.class.getResource("/com/example/moodle/FXML/student_assigmentViewPanel.fxml"));
             AnchorPane content = contentLoader.load();
-            HelloController.root.setCenter(content);
+            root.setCenter(content);
         } catch (IOException e) {
             e.printStackTrace();
         }
