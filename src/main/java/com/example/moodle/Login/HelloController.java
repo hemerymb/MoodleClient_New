@@ -40,7 +40,7 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
-    public ImageView logoToken;
+
     @FXML
     private Label errmsg;
 
@@ -72,8 +72,6 @@ public class HelloController implements Initializable {
         this.errmsg.setVisible(false);
         this.tryconnect.setVisible(false);
 
-        // Ajouter l'écouteur d'événements pour le logoToken
-        logoToken.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handleTokenView);
     }
 
     private boolean checkCredentials(String userName, String pass, boolean isTeacher) {
@@ -146,27 +144,6 @@ public class HelloController implements Initializable {
             }
         } else {
             errmsg.setText("User does not exist!");
-            errmsg.setVisible(true);
-        }
-    }
-
-    public void handleTokenView(MouseEvent event) {
-        try {
-            // Charger le fichier FXML
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/TokenView.fxml"));
-            // Créer une scène avec le contenu chargé
-            Parent tokenView = fxmlLoader.load();
-            Scene scene = new Scene(tokenView);
-
-            // Afficher la nouvelle scène dans la fenêtre principale
-            Stage tostage = new Stage();
-            tostage.initModality(Modality.APPLICATION_MODAL);
-            tostage.initStyle(StageStyle.TRANSPARENT);
-            tostage.setScene(scene);
-            tostage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            errmsg.setText("Unable to load the TokenView!");
             errmsg.setVisible(true);
         }
     }
