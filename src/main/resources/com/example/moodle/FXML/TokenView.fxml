@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="241.0" prefWidth="428.0" style="-fx-background-radius: 10; -fx-background-color: fff; -fx-border-color: #525252; -fx-border-radius: 10; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moodle.Login.TokenController">
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+    <children>
+        <VBox maxWidth="1.7976931348623157E308" spacing="20.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                    <children>
+                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="cancel" onMouseClicked="#handleCancelEvent" text="❌" textFill="#ef7d7d">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label fx:id="TokenLabel" text="ClientToken">
+                            <HBox.margin>
+                                <Insets right="30.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="Token" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="262.0" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Label fx:id="TokenLabel1" text="Server_URL">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="server_url" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="262.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Label text="Enter your client token to synchronise your server account to the app">
+               <font>
+                  <Font name="System Bold Italic" size="11.0" />
+               </font>
+            </Label>
+                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button fx:id="save" mnemonicParsing="false" onAction="#handleSave" style="-fx-background-color: #5883df; -fx-border-radius: 10;" text="Save" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="cancel1" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelEvent" style="-fx-background-color: e2e2e2; -fx-border-radius: 10;" text="Cancel">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</AnchorPane>

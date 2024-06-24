@@ -71,7 +71,7 @@ public class CourseViewPanelController implements Initializable {
     private Connection connect() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/moodleclient";
         String user = "root";
-        String password = "681503533";
+        String password = "root";
         return DriverManager.getConnection(url, user, password);
     }
 
