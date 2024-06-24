@@ -9,9 +9,9 @@ import com.example.moodle.Student.StudentPrivateFiles.PrivateFile1;
 
 public class PrivateFilesDAO {
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/moodleclient";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3307/moodleclient";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "juve5000";
 
     public static void main(String[] args) {
         try {
