@@ -22,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -79,6 +80,9 @@ public class CourseViewPanelController implements Initializable {
     @FXML
     private ScrollPane scrollpane;
 
+    @FXML
+    private Text chaptersTitle;
+
     public Course course;
 
     public static List<ChapterCard> Chapterslist;
@@ -99,6 +103,7 @@ public class CourseViewPanelController implements Initializable {
 
     @FXML
     void handleAssignmentsBtn(ActionEvent event) {
+        ChaptersVbox.setVisible(false);
         selectBtn(leftbtnMenu, AssignmentsBtn);
         ChaptersVbox.getChildren().clear();
 
@@ -107,14 +112,19 @@ public class CourseViewPanelController implements Initializable {
     @FXML
     void handleChaptersBtn(ActionEvent event) {
         selectBtn(leftbtnMenu, ChaptersBtn);
-        loadChaptersFromDatabase();
+        chaptersTitle.setVisible(true);
+        ChaptersVbox.setVisible(true);
         newChapBtn.setVisible(true);
         newChapBtn.setDisable(false);
+        ChaptersVbox.getChildren().clear();
+
+        loadChaptersFromDatabase();
 
     }
 
     @FXML
     void handleCourseFilesBtn(ActionEvent event) {
+        ChaptersVbox.setVisible(false);
         selectBtn(leftbtnMenu, CourseFilesBtn);
         ChaptersVbox.getChildren().clear();
 
@@ -147,6 +157,7 @@ public class CourseViewPanelController implements Initializable {
 
     @FXML
     void handleParticipantsBtn(ActionEvent event) {
+        ChaptersVbox.setVisible(false);
         selectBtn(leftbtnMenu, ParticipantsBtn);
         ChaptersVbox.getChildren().clear();
 
@@ -232,6 +243,7 @@ public class CourseViewPanelController implements Initializable {
                         rs.getInt("courseId")
                 );
 
+                ChaptersVbox.getChildren().clear();
                 addChapterCard(new ChapterCard(chap));
             }
         } catch (SQLException e) {
@@ -256,6 +268,8 @@ public class CourseViewPanelController implements Initializable {
     }
 
     void hideAll() {
+        ChaptersVbox.setVisible(false);
+        chaptersTitle.setVisible(false);
         newChapBtn.setVisible(false);
         newChapBtn.setDisable(true);
     }

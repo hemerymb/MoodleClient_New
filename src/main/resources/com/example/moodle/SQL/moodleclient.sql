@@ -46,4 +46,14 @@ CREATE TABLE IF NOT EXISTS private_files (
     fileType VARCHAR(50) NOT NULL,
     filePath VARCHAR(255) NOT NULL
 );
+CREATE TABLE IF NOT EXISTS documents_files (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fileName VARCHAR(255) NOT NULL,
+    fileSize BIGINT NOT NULL,
+    fileType VARCHAR(50) NOT NULL,
+    filePath VARCHAR(255) NOT NULL,
+    chapterId INT,
+    FOREIGN KEY (chapterId) REFERENCES Chapters(id)
+
+);
 

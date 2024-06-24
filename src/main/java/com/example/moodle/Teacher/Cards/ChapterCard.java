@@ -18,7 +18,7 @@ public class ChapterCard extends AnchorPane {
             FXMLLoader loader = new FXMLLoader(ChapterCard.class.getResource("/com/example/moodle/FXML/ChapterCard.fxml"));
             this.pane = loader.load();
             ChapterCardController cardController = loader.getController();
-            cardController.define(chap.getTitle(), chap.getNum()+"", 0);
+            cardController.define(chap.getTitle(), chap.getNum()+"", 0, chap);
             getChildren().add(this.pane);
         } catch (IOException e) {
             e.printStackTrace();
