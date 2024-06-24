@@ -66,7 +66,7 @@
                                 <Insets left="10.0" />
                             </HBox.margin>
                         </Button>
-                        <Button fx:id="cancel1" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelEvent" style="-fx-background-color: e2e2e2; -fx-border-radius: 10;" text="Cancel">
+                        <Button fx:id="cancel1" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelAction" style="-fx-background-color: e2e2e2; -fx-border-radius: 10;" text="Cancel">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
