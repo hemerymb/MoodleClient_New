@@ -115,7 +115,7 @@ public class TopDashboardController implements Initializable{
     static List<PrivateFile> privateFiles = new ArrayList<>();
 
     private static final String SERVER_ADDRESS = "http://localhost/";
-    private static final String TOKEN = "2a8037fc2be456239aba388221cfc1f7";
+    private static final String TOKEN = "70ee2f13a67b858438afd8ddb3525854";
 
 
 
@@ -170,7 +170,7 @@ public class TopDashboardController implements Initializable{
     public static void readCoursessyncro() {
         String URL = "jdbc:mysql://localhost:3307/moodleclient";
         String user = "root";
-        String password = "juve5000";
+        String password = "root";
         String query = "SELECT id,courseName,courseAbr,courseDescription,nbChapters,nbAssignments FROM Course";
         try (Connection connection = DriverManager.getConnection(URL,user, password);
              Statement statement = connection.createStatement();
@@ -194,7 +194,7 @@ public class TopDashboardController implements Initializable{
     public static List<PrivateFile> readPrivateFilessyncro() {
         String URL = "jdbc:mysql://localhost:3307/moodleclient";
         String user = "root";
-        String password = "juve5000";
+        String password = "root";
 
         String query = "SELECT * FROM private_files";
         try (Connection connection = DriverManager.getConnection(URL,user, password);

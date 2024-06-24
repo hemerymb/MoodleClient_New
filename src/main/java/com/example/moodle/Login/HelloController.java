@@ -3,7 +3,6 @@ package com.example.moodle.Login;
 import static com.example.moodle.moodleclient.Moodleclient.root;
 import static com.example.moodle.moodleclient.Moodleclient.user;
 
-
 import com.example.moodle.DBConnection;
 import com.example.moodle.HelloApplication;
 import com.example.moodle.MainDry.Dry;
@@ -16,7 +15,9 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -24,6 +25,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -62,12 +66,14 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         user = new client_moodle();
 
         this.errmsg.setText("");
         this.errmsg.setVisible(false);
         this.tryconnect.setVisible(false);
+
+        // Ajouter l'écouteur d'événements pour le logoToken
+        logoToken.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handleTokenView);
     }
 
     private boolean checkCredentials(String userName, String pass, boolean isTeacher) {
@@ -145,5 +151,23 @@ public class HelloController implements Initializable {
     }
 
     public void handleTokenView(MouseEvent event) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/TokenView.fxml"));
+            // Créer une scène avec le contenu chargé
+            Parent tokenView = fxmlLoader.load();
+            Scene scene = new Scene(tokenView);
+
+            // Afficher la nouvelle scène dans la fenêtre principale
+            Stage tostage = new Stage();
+            tostage.initModality(Modality.APPLICATION_MODAL);
+            tostage.initStyle(StageStyle.TRANSPARENT);
+            tostage.setScene(scene);
+            tostage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            errmsg.setText("Unable to load the TokenView!");
+            errmsg.setVisible(true);
+        }
     }
 }
