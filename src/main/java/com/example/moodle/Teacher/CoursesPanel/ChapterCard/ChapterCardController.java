@@ -1,15 +1,20 @@
 package com.example.moodle.Teacher.CoursesPanel.ChapterCard;
 
+import com.example.moodle.Teacher.CoursesPanel.CourseViewPanelController;
+import com.example.moodle.Teacher.CoursesPanel.DialogWindows.CreateChapterDialogController;
 import com.example.moodle.Teacher.entity.Chapter;
 import com.example.moodle.Teacher.entity.DocumentFile;
+import com.example.moodle.dao.CourseDAO;
 import com.example.moodle.dao.DocumentsFilesDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -44,6 +49,8 @@ public class ChapterCardController implements Initializable {
 
     public Chapter chapter;
 
+    private int NumFiles;
+
     private Connection connect() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/moodleclient";
         String user = "root";
@@ -53,6 +60,7 @@ public class ChapterCardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        NumFiles = 0;
         FilesVbox.getChildren().clear();
 
     }
@@ -82,9 +90,26 @@ public class ChapterCardController implements Initializable {
                 // Insert the file into the database
                 DocumentsFilesDAO.insertDocumentFile(fileName, fileSize, fileType, filePath, chapter.getId());
 
+                NumFiles++;
                 FilesVbox.getChildren().add(docLine(fileName, readableFileSize, fileType, filePath));
             }
+            FilesNumber.setText(NumFiles+"");
         }
+    }
+
+    @FXML
+    void deleteChapter(MouseEvent event) {
+        String query = "DELETE FROM chapters WHERE id = ?";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, chapter.getId());
+            pstmt.executeUpdate();
+            System.out.println("Chapter deleted successfully.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -103,10 +128,11 @@ public class ChapterCardController implements Initializable {
                     rs.getInt("chapterId")
                 );
 
+                NumFiles = 0;
                 FilesVbox.getChildren().clear();
-                FilesNumber.setText(0+"");
 
-                FilesNumber.setText((Integer.parseInt(FilesNumber.getText())+1)+"");
+                NumFiles++;
+                FilesNumber.setText(NumFiles+"");
                 FilesVbox.getChildren().add(docLine(doc.getFileName(), readableFileSize(doc.getFileSize()), doc.getFileType(), doc.getFilePath()));
             }
         } catch (SQLException e) {
@@ -151,8 +177,8 @@ public class ChapterCardController implements Initializable {
         Label path = new Label(filePath);
         Text name = new Text(fileName);
 
-        Button deldoc = new Button("❌");
-        deldoc.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
+        Label deldoc = new Label("❌");
+        deldoc.setStyle("-fx-background-color:#fff0; -fx-text-fill:#ff5e5e;");
 
 
         line.setPrefWidth(FilesVbox.getWidth());
@@ -167,12 +193,12 @@ public class ChapterCardController implements Initializable {
         line.getChildren().addAll(name, path, region, new Text(readableFileSize), new Text(fileType), deldoc);
 
         line.setOnMouseClicked(event -> handleDocClick(line, event));
-        deldoc.setOnAction(event -> deleteDocFile(name, event));
+        deldoc.setOnMouseClicked(event -> deleteDocFile(name, event));
 
         return line;
     }
 
-    private void deleteDocFile(Text fileName, ActionEvent event) {
+    private void deleteDocFile(Text fileName, MouseEvent event) {
         String query = "DELETE FROM documents_files WHERE fileName = ?";
         try (Connection conn = connect();
             PreparedStatement pstmt = conn.prepareStatement(query)) {

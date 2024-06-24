@@ -51,6 +51,8 @@ public class CreateChapterDialogController implements Initializable {
 
         try {
             ChaptersDAO.insertChapter(namefield.getText(), Integer.parseInt(numfield.getText()), "", course.getId());
+            course.setNbChapters(course.getNbChapters() + 1);
+            CourseDAO.updateCourse(course.getId(),course.getCourseName(), course.getCourseAbr(), course.getCourseDescription(), course.getNbChapters(), course.getNbAssignments());
             System.out.println("Course created successfully.");
 
             FXMLLoader coursVloader = new FXMLLoader(CreateChapterDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));

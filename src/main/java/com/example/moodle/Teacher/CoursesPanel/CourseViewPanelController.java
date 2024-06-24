@@ -228,7 +228,7 @@ public class CourseViewPanelController implements Initializable {
         return course;
     }
 
-    private void loadChaptersFromDatabase() {
+    public void loadChaptersFromDatabase() {
         String query = "SELECT * FROM chapters WHERE courseId = '" + course.getId() + "'";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(query);
