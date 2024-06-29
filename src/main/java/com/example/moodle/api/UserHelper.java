@@ -39,7 +39,7 @@ public class UserHelper {
             String token = getUserToken(username, password);
             if(!token.isEmpty()) {
                 System.out.println(token);
-                String urlStr = Moodleclient.serverAddress + "webservice/rest/server.php?wstoken=" + token + "&wsfunction=" + GET_USER + "&moodlewsrestformat=json&criteria[0][key]=username&criteria[0][value]=" + username;
+                String urlStr = Moodleclient.serverAddress + "webservice/rest/server.php?wstoken=" + Moodleclient.superToken + "&wsfunction=" + GET_USER + "&moodlewsrestformat=json&criteria[0][key]=username&criteria[0][value]=" + username;
                 String res = RequestHelper.formRequest(urlStr);
                 if(!res.isEmpty()) {
                     JSONParser parser = new JSONParser();

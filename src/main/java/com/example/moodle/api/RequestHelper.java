@@ -24,7 +24,7 @@ public class RequestHelper {
             while (sc.hasNext()) {
                 res += sc.nextLine();
             }
-            // System.out.println(res);
+            System.out.println(res);
             return res;
         }
         return "";

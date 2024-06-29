@@ -1,7 +1,6 @@
 package com.example.moodle.Student.StudentCoursesPanel;
 
-import com.example.moodle.Student.Entities.Chapter;
-import com.example.moodle.Student.Entities.Course;
+import com.example.moodle.Student.Entities.Section;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -12,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class ChapTileController {
-    private Chapter chapter;
+    private Section section;
 
     @FXML
     private AnchorPane chapContainer;
@@ -25,28 +24,28 @@ public class ChapTileController {
 
     @FXML
     void handleChap(MouseEvent event) {
-        if(this.chapter.getContent() != null) {
-            try (FileReader reader = new FileReader(this.chapter.getContent());
-                 BufferedReader br = new BufferedReader(reader)) {
-                String line;
-                while((line = br.readLine()) != null) {
-                    System.out.println(line);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        if(this.section.getContent() != null) {
+//            try (FileReader reader = new FileReader(this.section.getContent());
+//                 BufferedReader br = new BufferedReader(reader)) {
+//                String line;
+//                while((line = br.readLine()) != null) {
+//                    System.out.println(line);
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
     public void define(int num, String title) {
         numChap.setText(num + ".");
         titleChap.setText(title);
     }
 
-    public Chapter getChapter() {
-        return chapter;
+    public Section getChapter() {
+        return section;
     }
 
-    public void setChapter(Chapter chapter) {
-        this.chapter = chapter;
+    public void setChapter(Section section) {
+        this.section = section;
     }
 }

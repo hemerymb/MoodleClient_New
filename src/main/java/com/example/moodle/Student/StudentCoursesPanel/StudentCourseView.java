@@ -16,7 +16,7 @@ public class StudentCourseView extends Pane {
             FXMLLoader loader = new FXMLLoader(StudentCourseView.class.getResource("/com/example/moodle/FXML/student_CourseViewPanel_updated.fxml"));
             this.pane = loader.load();
             StudentCourseViewController controller = loader.getController();
-            controller.define(course.getCourseName(), course.getCourseDescription());
+            controller.define(course.getFullname(), course.getSummary());
             controller.setCourse(course);
             getChildren().add(this.pane);
         } catch (IOException e) {

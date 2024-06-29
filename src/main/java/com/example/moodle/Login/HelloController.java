@@ -277,7 +277,13 @@ public class HelloController implements Initializable {
         }
         User user = UsersDAO.findUser(userName);
         if (user == null) {
-            return false;
+            UserHelper userHelper = new UserHelper();
+            user = userHelper.getUser(userName, pass, isTeacher);
+            if(user == null) {
+                return false;
+            }
+            UsersDAO.insertUser(user);
+            return true;
         }
         if(pass.equals(user.getPassword())) {
             return true;

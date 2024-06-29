@@ -2,9 +2,9 @@ package com.example.moodle.Student.StudentCoursesPanel;
 
 import com.example.moodle.MainDry.Dry;
 import com.example.moodle.Student.Cards.ChapTile;
-import com.example.moodle.Student.Entities.Chapter;
+import com.example.moodle.Student.Entities.Section;
 import com.example.moodle.Student.Entities.Course;
-import com.example.moodle.dao.ChaptersDAO;
+import com.example.moodle.dao.SectionDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,9 +66,9 @@ public class StudentCourseViewController {
     @FXML
     void handleChaptersBtn(ActionEvent event) {
         if(vboxChapters.getChildren().isEmpty()) {
-            ArrayList<Chapter> chapters = ChaptersDAO.getChapters(course.getId());
-            for(Chapter chapter: chapters) {
-                ChapTile chapTile = new ChapTile(chapter);
+            ArrayList<Section> sections = SectionDAO.getSections((int) course.getCourseid());
+            for(Section section : sections) {
+                ChapTile chapTile = new ChapTile(section);
                 vboxChapters.getChildren().add(chapTile);
             }
         }

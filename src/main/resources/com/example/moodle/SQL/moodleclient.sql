@@ -23,7 +23,9 @@ CREATE TABLE IF NOT EXISTS course (
     enddate INT,
     created INT,
     updated INT,
+    studentid INT,
     teacherid INT,
+    FOREIGN KEY (studentid) REFERENCES user(userid),
     FOREIGN KEY (teacherid) REFERENCES user(userid)
 );
 
