@@ -1,7 +1,7 @@
 package com.example.moodle.Student.Entities;
 
 public class User {
-    private int userid;
+    private long userid;
     private String username;
     private String password;
     private String token;
@@ -11,11 +11,20 @@ public class User {
     public User() {
     }
 
-    public int getUserid() {
+    public User(int userid, String username, String password, String token, String picture, int role) {
+        this.userid = userid;
+        this.username = username;
+        this.password = password;
+        this.token = token;
+        this.picture = picture;
+        this.role = role;
+    }
+
+    public long getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(long userid) {
         this.userid = userid;
     }
 

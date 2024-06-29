@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS section (
 );
 
 DROP TABLE IF EXISTS module;
-DROP TABLE IF NOT EXISTS module (
+CREATE TABLE IF NOT EXISTS module (
     cmid INT PRIMARY KEY,
     sectionid INT,
     name VARCHAR(255),
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS assignment (
     created INT,
     duedate INT,
     attemptnumber INT,
-    FOREIGN KEY (moduleid) REFERENCES module(moduleid);
+    FOREIGN KEY (moduleid) REFERENCES module(cmid)
 );
 
 DROP TABLE IF EXISTS private_files;
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS file (
     isexternalfile INT,
     repositorytype VARCHAR(255),
     mimetype VARCHAR(255),
-    FOREIGN KEY (moduleid) REFERENCES module(moduleid)
+    FOREIGN KEY (moduleid) REFERENCES module(cmid)
 );
 
 DROP TABLE IF EXISTS submission;

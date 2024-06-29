@@ -3,12 +3,13 @@ package com.example.moodle.dao;
 import com.example.moodle.Student.Entities.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UsersDAO {
 
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/moodleclient";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "";
 
     public static void main(String[] args) {
         try {
@@ -28,7 +29,7 @@ public class UsersDAO {
             readUsers();
 
             // Supprimer un users
-            deleteUsers(1);
+            deleteUser(1);
 
             // Lire tous les enseignants
             readUsers();
@@ -39,11 +40,11 @@ public class UsersDAO {
     }
 
     // Méthode pour insérer un enseignant
-    public static void insertUsers(User user) {
+    public static void insertUser(User user) {
         String query = "INSERT INTO user (userid, username, password, token, picture, role) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, user.getUserid());
+            statement.setLong(1, user.getUserid());
             statement.setString(2, user.getUsername());
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getToken());
@@ -78,7 +79,53 @@ public class UsersDAO {
         }
     }
 
-    // Méthode pour mettre à jour un enseignant
+    public static User findUser(String name) {
+        User user = null;
+        String query = "SELECT * FROM user WHERE username = ?";
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, name);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("userid");
+                    String token = resultSet.getString("token");
+                    String picture = resultSet.getString("picture");
+                    String username = resultSet.getString("username");
+                    String password = resultSet.getString("password");
+                    int role = resultSet.getInt("role");
+
+                    user = new User(id, username, password, token, picture, role);
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public static ArrayList<User> getUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        String query = "SELECT * FROM user";
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("userid");
+                String token = resultSet.getString("token");
+                String picture = resultSet.getString("picture");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                int role = resultSet.getInt("role");
+
+                User user = new User(id, username, password, token, picture, role);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    // Méthode pour mettre à jour un enseignant, qu'on ne va pas utiliser ici
     public static void updateUsers(int id, String name, String surname, String username, String password, String email, String statut) {
         String query = "UPDATE Users SET name = ?, surname = ?, username = ?, password = ?, email = ?, statut = ? WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
@@ -98,13 +145,13 @@ public class UsersDAO {
     }
 
     // Méthode pour supprimer un enseignant
-    public static void deleteUsers(int id) {
-        String query = "DELETE FROM Users WHERE id = ?";
+    public static void deleteUser(int id) {
+        String query = "DELETE FROM user WHERE userid = ?";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
             statement.executeUpdate();
-            System.out.println("Users deleted successfully.");
+            System.out.println("User deleted successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
