@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 public class Moodleclient {
     public static BorderPane root;
     public static client_moodle client;
+    public static String serverAddress = "http://localhost/";
 
 }
 

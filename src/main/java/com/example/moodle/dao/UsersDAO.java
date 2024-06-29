@@ -1,5 +1,7 @@
 package com.example.moodle.dao;
 
+import com.example.moodle.Student.Entities.User;
+
 import java.sql.*;
 
 public class UsersDAO {
@@ -14,7 +16,7 @@ public class UsersDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Insérer le users
-            insertUsers("John", "Doe", "jdoe", "password123", "jdoe@example.com", "teacher");
+            // insertUsers("John", "Doe", "jdoe", "password123", "jdoe@example.com", "teacher");
 
             // Lire tous le users
             readUsers();
@@ -37,16 +39,16 @@ public class UsersDAO {
     }
 
     // Méthode pour insérer un enseignant
-    public static void insertUsers(String name, String surname, String username, String password, String email, String statut) {
-        String query = "INSERT INTO Users (name, surname, username, password, email, statut) VALUES (?, ?, ?, ?, ?, ?)";
+    public static void insertUsers(User user) {
+        String query = "INSERT INTO user (userid, username, password, token, picture, role) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, name);
-            statement.setString(2, surname);
-            statement.setString(3, username);
-            statement.setString(4, password);
-            statement.setString(5, email);
-            statement.setString(6, statut);
+            statement.setInt(1, user.getUserid());
+            statement.setString(2, user.getUsername());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getToken());
+            statement.setString(5, user.getPicture());
+            statement.setInt(6, user.getRole());
             statement.executeUpdate();
             System.out.println("Users inserted successfully.");
         } catch (SQLException e) {
