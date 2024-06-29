@@ -22,63 +22,23 @@
                         <Image url="@../images/triangles-top.jpg" />
                      </image>
                   </ImageView>
-                  <Label fx:id="create" alignment="CENTER" layoutX="220.0" layoutY="74.0" prefHeight="48.0" prefWidth="258.0" text="Create Account" textAlignment="CENTER">
-                     <font>
-                        <Font name="Century" size="28.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="message2" alignment="CENTER" layoutX="186.0" layoutY="123.0" prefHeight="39.0" prefWidth="345.0" text="Log in to start using Moodle Client">
+                  <Label fx:id="message2" alignment="CENTER" layoutX="218.0" layoutY="123.0" prefHeight="39.0" prefWidth="345.0" text="Log in to start using Moodle Client">
                      <font>
                         <Font name="Candara Light" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="message1" alignment="CENTER" layoutX="111.0" layoutY="132.0" prefHeight="21.0" prefWidth="513.0" text="Please enter your personal information for registration">
-                     <font>
-                        <Font name="Candara Light Italic" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="signin" alignment="CENTER" layoutX="198.0" layoutY="79.0" prefHeight="39.0" prefWidth="321.0" text="Sign in to MoodleClient">
+                  <Label fx:id="signin" alignment="CENTER" layoutX="222.0" layoutY="84.0" prefHeight="39.0" prefWidth="321.0" text="Sign in to MoodleClient">
                      <font>
                         <Font name="Century" size="26.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="name" focusColor="#f5b658" layoutX="177.0" layoutY="186.0" prefHeight="39.0" prefWidth="410.0" promptText="Name" />
-                  <JFXTextField fx:id="surname" focusColor="#f5b658" layoutX="177.0" layoutY="238.0" prefHeight="39.0" prefWidth="410.0" promptText="Surname" />
-                  <JFXTextField fx:id="username" focusColor="#f5b658" layoutX="177.0" layoutY="292.0" prefHeight="39.0" prefWidth="410.0" promptText="Username" />
-                  <JFXPasswordField fx:id="password" focusColor="#f5b658" layoutX="177.0" layoutY="345.0" prefHeight="39.0" prefWidth="410.0" promptText="Password" />
-                  <JFXTextField fx:id="email" focusColor="#f5b658" layoutX="177.0" layoutY="404.0" prefHeight="39.0" prefWidth="410.0" promptText="Email" />
-                  <JFXRadioButton fx:id="teacher" layoutX="308.0" layoutY="475.0" text="Teacher">
-                     <font>
-                        <Font name="Candara Light" size="18.0" />
-                     </font>
-                  </JFXRadioButton>
-                  <JFXRadioButton fx:id="student" layoutX="439.0" layoutY="476.0" text="Student">
-                     <font>
-                        <Font name="Candara Light" size="18.0" />
-                     </font>
-                  </JFXRadioButton>
-                  <Label fx:id="statut" alignment="CENTER" layoutX="198.0" layoutY="471.0" prefHeight="31.0" prefWidth="89.0" text="Statut" underline="true">
-                     <font>
-                        <Font name="Candara Light" size="17.0" />
-                     </font>
-                  </Label>
-                  <JFXButton fx:id="ButtonSignUp" layoutX="298.0" layoutY="534.0" onAction="#handleLoginBtn" prefHeight="31.0" prefWidth="184.0" style="-fx-border-color: Black; -fx-border-radius: 10; -fx-background-color: orange; -fx-background-radius: 10;" text=" SIGN IN">
+                  <JFXButton fx:id="ButtonSignUp" layoutX="298.0" layoutY="512.0" onAction="#handleLoginBtn" prefHeight="31.0" prefWidth="184.0" style="-fx-border-color: Black; -fx-border-radius: 10; -fx-background-color: orange; -fx-background-radius: 10;" text=" SIGN IN">
                      <font>
                         <Font name="Candara" size="19.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="Forget" layoutX="487.0" layoutY="350.0" prefHeight="39.0" prefWidth="199.0" text="Forget your password ?" textFill="#ff8000">
-                     <font>
-                        <Font name="Candara Bold Italic" size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="ButtonSignUp1" layoutX="298.0" layoutY="534.0" onAction="#handleSignUpBtn" prefHeight="31.0" prefWidth="184.0" style="-fx-border-color: Black; -fx-border-radius: 10; -fx-background-color: orange; -fx-background-radius: 10;" text=" SIGN UP">
-                     <font>
-                        <Font name="Candara" size="19.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXTextField fx:id="username1" focusColor="#f5b658" layoutX="177.0" layoutY="292.0" prefHeight="39.0" prefWidth="410.0" promptText="Username" />
-                  <JFXPasswordField fx:id="password1" focusColor="#f5b658" layoutX="177.0" layoutY="345.0" prefHeight="39.0" prefWidth="410.0" promptText="Password" />
+                  <JFXTextField fx:id="username1" focusColor="#f5b658" layoutX="185.0" layoutY="263.0" prefHeight="39.0" prefWidth="410.0" promptText="Username" />
+                  <JFXPasswordField fx:id="password1" focusColor="#f5b658" layoutX="185.0" layoutY="334.0" prefHeight="39.0" prefWidth="410.0" promptText="Password" />
                   <Label fx:id="errmsg" alignment="CENTER" layoutX="250.0" layoutY="162.0" opacity="0.54" prefHeight="21.0" prefWidth="281.0" style="-fx-background-color: red; -fx-background-radius: 20; -fx-border-radius: 20;" text="Your username or password is wrong" textFill="WHITE">
                      <font>
                         <Font name="Candara" size="17.0" />
@@ -89,70 +49,40 @@
                         <Font name="Candara" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="statut1" alignment="CENTER" layoutX="198.0" layoutY="471.0" prefHeight="31.0" prefWidth="89.0" text="Statut" underline="true">
+                  <Label fx:id="statut1" alignment="CENTER" layoutX="185.0" layoutY="416.0" prefHeight="31.0" prefWidth="89.0" text="Statut" underline="true">
                      <font>
                         <Font name="Candara Light" size="17.0" />
                      </font>
                   </Label>
-                  <JFXRadioButton fx:id="teacher1" layoutX="308.0" layoutY="476.0" text="Teacher">
+                  <JFXRadioButton fx:id="teacher1" layoutX="288.0" layoutY="421.0" text="Teacher">
                      <font>
                         <Font name="Candara Light" size="18.0" />
                      </font>
                   </JFXRadioButton>
-                  <JFXRadioButton fx:id="student1" layoutX="439.0" layoutY="476.0" text="Student">
+                  <JFXRadioButton fx:id="student1" layoutX="431.0" layoutY="421.0" text="Student">
                      <font>
                         <Font name="Candara Light" size="18.0" />
                      </font>
                   </JFXRadioButton>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="Pane2" layoutX="-10.0" prefHeight="746.0" prefWidth="398.0" style="-fx-background-color: orange; -fx-background-radius: 30;">
+            <AnchorPane fx:id="Pane2" layoutX="-10.0" prefHeight="746.0" prefWidth="441.0" style="-fx-background-color: orange; -fx-background-radius: 30;">
                <children>
-                  <Label fx:id="welcome" alignment="CENTER" layoutX="34.0" layoutY="164.0" prefHeight="61.0" prefWidth="236.0" text="WELCOME TO MOODLE">
+                  <Label fx:id="welcome" alignment="CENTER" layoutX="45.0" layoutY="295.0" prefHeight="61.0" prefWidth="292.0" text="WELCOME TO MOODLE">
                      <font>
-                        <Font name="Candara Bold Italic" size="24.0" />
+                        <Font name="Candara Bold Italic" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="sms1" alignment="CENTER" layoutX="23.0" layoutY="281.0" prefHeight="39.0" prefWidth="355.0" text="Our Moodle application is an innovative e-learning">
+                  <Label fx:id="client" layoutX="338.0" layoutY="295.0" prefHeight="61.0" prefWidth="89.0" text="CLIENT" textFill="WHITE">
                      <font>
-                        <Font name="Candara Light" size="15.0" />
+                        <Font name="Candara Bold Italic" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="sms2" layoutX="32.0" layoutY="320.0" prefHeight="21.0" prefWidth="337.0" text="platform designed to support both teachers and">
+                  <Label fx:id="sms4" alignment="CENTER" layoutX="62.0" layoutY="356.0" prefHeight="61.0" prefWidth="345.0" text="Welcome back to our Moodle application">
                      <font>
-                        <Font name="Candara Light" size="15.0" />
+                        <Font name="Candara Light" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="sms3" alignment="CENTER" layoutX="35.0" layoutY="352.0" prefHeight="21.0" prefWidth="321.0" text="students in their educational journey">
-                     <font>
-                        <Font name="Candara Light" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="client" layoutX="270.0" layoutY="164.0" prefHeight="61.0" prefWidth="89.0" text="CLIENT" textFill="WHITE">
-                     <font>
-                        <Font name="Candara Bold Italic" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="hello" alignment="CENTER" layoutX="62.0" layoutY="171.0" prefHeight="48.0" prefWidth="267.0" text="HELLO FRIEND !">
-                     <font>
-                        <Font name="Candara Bold Italic" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="sms4" alignment="CENTER" layoutX="62.0" layoutY="300.0" prefHeight="61.0" prefWidth="292.0" text="Welcome back to our Moodle application">
-                     <font>
-                        <Font name="Candara Light" size="15.0" />
-                     </font>
-                  </Label>
-                  <JFXButton fx:id="ButonSignIn" layoutX="99.0" layoutY="448.0" onMouseClicked="#btn" prefHeight="48.0" prefWidth="192.0" style="-fx-border-color: BLACK; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="SIGN IN">
-                     <font>
-                        <Font name="Candara" size="19.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="ButonSignIn1" layoutX="99.0" layoutY="448.0" onMouseClicked="#btn2" prefHeight="48.0" prefWidth="192.0" style="-fx-border-color: BLACK; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="SIGN UP">
-                     <font>
-                        <Font name="Candara" size="19.0" />
-                     </font>
-                  </JFXButton>
                </children>
             </AnchorPane>
          </children>

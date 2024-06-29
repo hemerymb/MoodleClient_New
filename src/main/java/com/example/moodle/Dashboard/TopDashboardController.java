@@ -1,8 +1,6 @@
 package com.example.moodle.Dashboard;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -116,6 +114,8 @@ public class TopDashboardController implements Initializable{
 
     private static final String SERVER_ADDRESS = "http://localhost/";
     private static final String TOKEN = "2a8037fc2be456239aba388221cfc1f7";
+
+    private static final String REQUEST_URL = "http://localhost/login/token.php?username=camrole&password=Camrole-5000&service=SMAS";
 
 
 
@@ -323,6 +323,43 @@ public class TopDashboardController implements Initializable{
         }
 
 
+    }
+
+
+    public static String executeRequest() throws Exception {
+        URL url = new URL(REQUEST_URL);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // Extract the token from the response
+            String responseStr = response.toString();
+            return extractTokenFromResponse(responseStr);
+        } else {
+            throw new RuntimeException("Failed : HTTP error code : " + responseCode);
+        }
+    }
+
+    private static String extractTokenFromResponse(String response) {
+        // Assuming the response is in JSON format: {"token":"yourtoken"}
+        // You can use a JSON library like org.json to parse the response
+        try {
+            org.json.JSONObject jsonObject = new org.json.JSONObject(response);
+            return jsonObject.getString("token");
+        } catch (org.json.JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
