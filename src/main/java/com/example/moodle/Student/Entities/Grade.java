@@ -4,6 +4,7 @@ public class Grade {
     private long gradeid;
     private long submissionid;
     private long grade;
+    private long grader; // Celui qui note
     private String comment;
 
     public Grade() {
@@ -39,5 +40,13 @@ public class Grade {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public long getGrader() {
+        return grader;
+    }
+
+    public void setGrader(long grader) {
+        this.grader = grader;
     }
 }

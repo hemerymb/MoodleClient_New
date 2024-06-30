@@ -103,6 +103,8 @@ CREATE TABLE IF NOT EXISTS grade (
     gradeid INT AUTO_INCREMENT PRIMARY KEY,
     submissionid INT,
     grade INT,
+    grader INT,
     comment VARCHAR(255),
-    FOREIGN KEY (submissionid) REFERENCES submission(submissionid)
+    FOREIGN KEY (submissionid) REFERENCES submission(submissionid),
+    FOREIGN KEY (grader) REFERENCES user(userid)
 );
