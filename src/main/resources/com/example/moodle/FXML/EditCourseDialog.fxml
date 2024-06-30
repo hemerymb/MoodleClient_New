@@ -21,6 +21,11 @@
          <children>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
+                  <Label fx:id="alertMsg" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="271.0" text="All fields must be filled out!" textFill="#ef2b2b" visible="false">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                   <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                   <Label onMouseClicked="#handleCancelEvent" text="❌" textFill="#ef7d7d">
                      <font>

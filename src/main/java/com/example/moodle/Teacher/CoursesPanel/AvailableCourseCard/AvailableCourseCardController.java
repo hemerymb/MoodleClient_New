@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import static com.example.moodle.moodleclient.Moodleclient.currentCourse;
 import static com.example.moodle.moodleclient.Moodleclient.root;
 
 public class AvailableCourseCardController implements Initializable{
@@ -35,11 +36,10 @@ public class AvailableCourseCardController implements Initializable{
 
     @FXML
     void handleCourseView(MouseEvent event) throws IOException {
+        currentCourse = cours;
+
         FXMLLoader contentLoader = new FXMLLoader(AvailableCourseCardController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
         AnchorPane content = contentLoader.load();
-
-        CourseViewPanelController contentCtrl = contentLoader.getController();
-        contentCtrl.course = cours;
 
         Label name = (Label) contentLoader.getNamespace().get("coursename");
         TextArea desc = (TextArea) contentLoader.getNamespace().get("courseDescription");
@@ -49,12 +49,12 @@ public class AvailableCourseCardController implements Initializable{
         root.setCenter(content);
     }
 
-    public void define(String name, String description, int nbchapters, Course cours) {
-        this.courseName.setText(name);
-        this.courseDesc.setText(description);
+    public void define(Course course) {
+        this.courseName.setText(course.getCourseName());
+        this.courseDesc.setText(course.getCourseDescription());
         this.courseDesc.setStyle("-fx-text-fill: black");
-        this.ChaptersNumber.setText(nbchapters + " Chapitres");
+        this.ChaptersNumber.setText(course.getNbChapters() + " Chapters");
         this.ChaptersNumber.setStyle("-fx-text-fill: black");
-        this.cours = cours;
+        this.cours = course;
     }
 }

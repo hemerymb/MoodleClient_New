@@ -55,4 +55,17 @@ public class ChaptersDAO {
             e.printStackTrace();
         }
     }
+
+    // Méthode pour supprimer un chapitre
+    public static void deleteChapter(int id) {
+        String query = "DELETE FROM Course WHERE id = ?";
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            System.out.println("Chapter deleted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

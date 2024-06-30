@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
+import static com.example.moodle.moodleclient.Moodleclient.currentCourse;
 import static com.example.moodle.moodleclient.Moodleclient.root;
 
 public class EditCourseDialogController implements Initializable {
@@ -33,46 +34,34 @@ public class EditCourseDialogController implements Initializable {
     @FXML
     private TextField shortnamefield;
 
-    private Course course;
+    @FXML
+    private Label alertMsg;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        namefield.setText(currentCourse.getCourseName());
+        shortnamefield.setText(currentCourse.getCourseAbr());
+        descriptionfield.setText(currentCourse.getCourseDescription());
     }
 
     @FXML
     void editCourse(ActionEvent event) {
 
         if (namefield.getText().isEmpty() || shortnamefield.getText().isEmpty() || descriptionfield.getText().isEmpty()) {
-            System.out.println("All fields must be filled out!");
+            alertMsg.setVisible(true);
             return;
         }
 
         try {
+            currentCourse.setCourseName(namefield.getText());
+            currentCourse.setCourseAbr(shortnamefield.getText());
+            currentCourse.setCourseDescription(descriptionfield.getText());
 
-            CourseDAO.updateCourse(course.getId(), namefield.getText(), shortnamefield.getText(), descriptionfield.getText(), course.getNbChapters(), course.getNbAssignments());
+            CourseDAO.updateCourse(currentCourse.getId(), namefield.getText(), shortnamefield.getText(), descriptionfield.getText(), currentCourse.getNbChapters(), currentCourse.getNbAssignments());
             System.out.println("Course created successfully.");
-
-            FXMLLoader coursesloader = new FXMLLoader(CreateCourseDialogController.class.getResource("/com/example/moodle/FXML/CoursesPanel_updated.fxml"));
-            AnchorPane courses = coursesloader.load();
-
-            CoursesPanelController CourseCtrler = coursesloader.getController();
-            CourseCtrler.addCourseCard(new CourseCard(new Course(
-                    course.getId(),
-                    namefield.getText(),
-                    course.getCourseAbr(),
-                    descriptionfield.getText(),
-                    course.getNbChapters(),
-                    course.getNbAssignments()
-            )));
 
             FXMLLoader courseviewloader = new FXMLLoader(CreateCourseDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
             AnchorPane courseview = courseviewloader.load();
-
-            Label nameView = (Label) courseviewloader.getNamespace().get("coursename");
-            TextArea descView = (TextArea) courseviewloader.getNamespace().get("courseDescription");
-
-            nameView.setText(namefield.getText()); descView.setText(descriptionfield.getText());
 
             root.setCenter(courseview);
 
@@ -96,7 +85,4 @@ public class EditCourseDialogController implements Initializable {
         stage.close();
     }
 
-    public void setCourse(Course crs){
-        course = crs;
-    }
 }

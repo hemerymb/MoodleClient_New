@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static com.example.moodle.moodleclient.Moodleclient.currentCourse;
+
 
 public class ChapterCardController implements Initializable {
 
@@ -71,8 +73,10 @@ public class ChapterCardController implements Initializable {
         fileChooser.setTitle("Choose files");
 
         fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All doc files", "*.pdf", "*.PDF", "*.doc", "*.docx", "*.odt", "*.ppt", "*.pptx", "*.xls", "*.xlsx"),
                 new FileChooser.ExtensionFilter("PDF files", "*.pdf", "*.PDF"),
                 new FileChooser.ExtensionFilter("Word files", "*.doc", "*.docx", "*.odt"),
+                new FileChooser.ExtensionFilter("Presentation files", "*.ppt", "*.pptx"),
                 new FileChooser.ExtensionFilter("Sheets files", "*.xls", "*.xlsx")
         );
 
@@ -99,9 +103,17 @@ public class ChapterCardController implements Initializable {
 
     @FXML
     void deleteChapter(MouseEvent event) {
-        String query = "DELETE FROM chapters WHERE id = ?";
+
         try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement statement = conn.prepareStatement("DELETE FROM documents_files WHERE chapterId = ?")) {
+            statement.setInt(1, chapter.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM chapters WHERE id = ?")) {
             pstmt.setInt(1, chapter.getId());
             pstmt.executeUpdate();
             System.out.println("Chapter deleted successfully.");
@@ -110,10 +122,16 @@ public class ChapterCardController implements Initializable {
             e.printStackTrace();
         }
 
+        currentCourse.setNbChapters(currentCourse.getNbChapters() - 1);
+        CourseDAO.updateCourse(currentCourse.getId(), currentCourse.getCourseName(), currentCourse.getCourseAbr(), currentCourse.getCourseDescription(), currentCourse.getNbChapters(), currentCourse.getNbAssignments());
+
     }
 
 
     private void loadDocumentsFilesFromDatabase() {
+        NumFiles = 0;
+        FilesVbox.getChildren().clear();
+
         String query = "SELECT * FROM documents_files WHERE chapterId = '" + chapter.getId() + "'";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(query);
@@ -127,9 +145,6 @@ public class ChapterCardController implements Initializable {
                     rs.getString("filePath"),
                     rs.getInt("chapterId")
                 );
-
-                NumFiles = 0;
-                FilesVbox.getChildren().clear();
 
                 NumFiles++;
                 FilesNumber.setText(NumFiles+"");
@@ -146,6 +161,8 @@ public class ChapterCardController implements Initializable {
             return "PDF Document";
         } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
             return "Word Document";
+        } else if (fileName.endsWith(".ppt") || fileName.endsWith(".pptx")) {
+            return "Presentation Doc";
         } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
             return "Sheet Document";
         } else {
@@ -177,6 +194,10 @@ public class ChapterCardController implements Initializable {
         Label path = new Label(filePath);
         Text name = new Text(fileName);
 
+        Label type = new Label(fileType);
+        type.setStyle("-fx-background-color:#fff0; -fx-text-fill:#000000;");
+        type.setPrefWidth(120);
+
         Label deldoc = new Label("❌");
         deldoc.setStyle("-fx-background-color:#fff0; -fx-text-fill:#ff5e5e;");
 
@@ -190,7 +211,7 @@ public class ChapterCardController implements Initializable {
         path.setMaxWidth(50);
         path.setVisible(false);
 
-        line.getChildren().addAll(name, path, region, new Text(readableFileSize), new Text(fileType), deldoc);
+        line.getChildren().addAll(name, path, region, new Text(readableFileSize), type, deldoc);
 
         line.setOnMouseClicked(event -> handleDocClick(line, event));
         deldoc.setOnMouseClicked(event -> deleteDocFile(name, event));

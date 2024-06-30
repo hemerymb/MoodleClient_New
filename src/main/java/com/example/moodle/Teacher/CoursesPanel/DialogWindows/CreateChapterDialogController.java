@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.moodle.moodleclient.Moodleclient.currentCourse;
 import static com.example.moodle.moodleclient.Moodleclient.root;
 
 public class CreateChapterDialogController implements Initializable {
@@ -33,8 +34,6 @@ public class CreateChapterDialogController implements Initializable {
 
     @FXML
     private TextField numfield;
-
-    public Course course;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,28 +49,13 @@ public class CreateChapterDialogController implements Initializable {
         }
 
         try {
-            ChaptersDAO.insertChapter(namefield.getText(), Integer.parseInt(numfield.getText()), "", course.getId());
-            course.setNbChapters(course.getNbChapters() + 1);
-            CourseDAO.updateCourse(course.getId(),course.getCourseName(), course.getCourseAbr(), course.getCourseDescription(), course.getNbChapters(), course.getNbAssignments());
+            ChaptersDAO.insertChapter(namefield.getText(), Integer.parseInt(numfield.getText()), "", currentCourse.getId());
+            currentCourse.setNbChapters(currentCourse.getNbChapters() + 1);
+            CourseDAO.updateCourse(currentCourse.getId(),currentCourse.getCourseName(), currentCourse.getCourseAbr(), currentCourse.getCourseDescription(), currentCourse.getNbChapters(), currentCourse.getNbAssignments());
             System.out.println("Course created successfully.");
 
             FXMLLoader coursVloader = new FXMLLoader(CreateChapterDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
             AnchorPane coursV = coursVloader.load();
-
-            Label nameView = (Label) coursVloader.getNamespace().get("coursename");
-            TextArea descView = (TextArea) coursVloader.getNamespace().get("courseDescription");
-
-            nameView.setText(course.getCourseName()); descView.setText(course.getCourseDescription());
-
-            CourseViewPanelController CourVCtrler = coursVloader.getController();
-            CourVCtrler.course = course;
-            CourVCtrler.addChapterCard(new ChapterCard(new Chapter(
-                    CourVCtrler.getChaptersCount(),
-                    namefield.getText(),
-                    Integer.parseInt(numfield.getText()),
-                    "",
-                    course.getId()
-            )));
 
             root.setCenter(coursV);
 
