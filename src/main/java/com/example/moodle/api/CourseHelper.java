@@ -22,6 +22,7 @@ public class CourseHelper {
     }
 
     public ArrayList<Course> getEnrolledCourses(long userid) {
+        SectionHelper sectionHelper = new SectionHelper();
         ArrayList<Course> courses = new ArrayList<>();
         String urlStr = Moodleclient.serverAddress + "webservice/rest/server.php?wstoken=" + Moodleclient.superToken + "&wsfunction=" + COURSES_ENROLLED + "&moodlewsrestformat=json&userid=" + userid;
         try {
@@ -43,7 +44,7 @@ public class CourseHelper {
                     course.setStartdate((Long) jsonObject.get("startdate"));
                     course.setEnddate((Long) jsonObject.get("enddate"));
                     course.setStudentid(userid);
-                    course.setNumsections(getSections(course.getCourseid()).size() - 1);
+                    course.setNumsections(sectionHelper.getSections(course.getCourseid()).size());
 
                     courses.add(course);
                 }
@@ -104,29 +105,4 @@ public class CourseHelper {
         }
         return false;
     }
-
-    public ArrayList<Section> getSections(long courseid) {
-        ArrayList<Section> sections = new ArrayList<>();
-        String urlStr = Moodleclient.serverAddress + "webservice/rest/server.php?wstoken=" + Moodleclient.superToken + "&wsfunction=" + COURSE_CONTENT + "&moodlewsrestformat=json&courseid=" + courseid;
-
-        try {
-            String res = RequestHelper.formRequest(urlStr);
-            JSONParser parser = new JSONParser();
-            JSONArray data = (JSONArray) parser.parse(res);
-            for(int i = 0; i < data.size(); i++) {
-                JSONObject jsonObject = (JSONObject) data.get(i);
-
-                Section section = new Section();
-                section.setSectionid((Long) jsonObject.get("id"));
-                section.setSectionname(jsonObject.get("name").toString());
-                section.setCourseid(courseid);
-
-                sections.add(section);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return sections;
-    }
-
 }

@@ -9,7 +9,7 @@ public class File {
     private String fileurl;
     private long created;
     private long updated;
-    private long repositorytype;
+    private String repositorytype;
     private String mimetype;
 
     public File() {
@@ -79,11 +79,11 @@ public class File {
         this.updated = updated;
     }
 
-    public long getRepositorytype() {
+    public String getRepositorytype() {
         return repositorytype;
     }
 
-    public void setRepositorytype(long repositorytype) {
+    public void setRepositorytype(String repositorytype) {
         this.repositorytype = repositorytype;
     }
 
