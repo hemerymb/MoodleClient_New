@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS user (
 
 DROP TABLE IF EXISTS course;
 CREATE TABLE IF NOT EXISTS course (
-    courseid INT PRIMARY KEY,
+    courseid INT,
     fullname VARCHAR(255),
     shortname VARCHAR(50),
     summary TEXT,
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS course (
     updated INT,
     studentid INT,
     teacherid INT,
+    PRIMARY KEY (courseid, studentid),
     FOREIGN KEY (studentid) REFERENCES user(userid),
     FOREIGN KEY (teacherid) REFERENCES user(userid)
 );
