@@ -8,7 +8,9 @@ import java.util.ArrayList;
 public class ChaptersDAO {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3307/moodleclient";
     private static final String USERNAME = "root";
+
     private static final String PASSWORD = "root";
+
 
     public static void main(String[] args) {
         try {
@@ -39,5 +41,20 @@ public class ChaptersDAO {
         }
 
         return chapters;
+    }
+
+    public static void insertChapter(String chaptertitle, int chapterNum, String content, int courseId) {
+        String query = "INSERT INTO Chapters (title, num, content, courseId) VALUES (?, ?, ?, ?)";
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, chaptertitle);
+            statement.setInt(2, chapterNum);
+            statement.setString(3, content);
+            statement.setInt(4, courseId);
+            statement.executeUpdate();
+            System.out.println("Chapter inserted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
