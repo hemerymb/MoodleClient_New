@@ -119,6 +119,7 @@ public class CourseViewPanelController implements Initializable {
         newChapBtn.setVisible(true);
         newChapBtn.setDisable(false);
         ChaptersVbox.getChildren().clear();
+        Chapterslist.clear();
 
         loadChaptersFromDatabase();
 
