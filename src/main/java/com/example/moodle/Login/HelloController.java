@@ -6,8 +6,12 @@ import static com.example.moodle.moodleclient.Moodleclient.user;
 import com.example.moodle.DBConnection;
 import com.example.moodle.HelloApplication;
 import com.example.moodle.MainDry.Dry;
+
 import com.example.moodle.moodleclient.Moodleclient;
 import com.example.moodle.moodleclient.client_moodle;
+import com.example.moodle.Student.Entities.User;
+import com.example.moodle.api.UserHelper;
+import com.example.moodle.dao.UsersDAO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
@@ -34,8 +38,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -74,24 +78,30 @@ public class HelloController implements Initializable {
 
     }
 
-    private boolean checkCredentials(String userName, String pass, boolean isTeacher) {
-        try (Connection connection = DBConnection.getConnection()) {
-            String query = "SELECT COUNT(*) FROM Users WHERE username = ? AND password = ? AND statut = ?";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, userName);
-                statement.setString(2, pass);
-                statement.setString(3, isTeacher ? "Teacher" : "Student");
-
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    if (resultSet.next()) {
-                        return resultSet.getInt(1) > 0;
-                    }
-                }
+    private boolean checkCredentials(String userName, String pass, int isTeacher) {
+        ArrayList<User> users = UsersDAO.getUsers();
+        System.out.println(users.size());
+        if(users.size() == 0) {
+            UserHelper userHelper = new UserHelper();
+            User user = userHelper.getUser(userName, pass, isTeacher);
+            if(user == null) {
+                return false;
             }
-        } catch (SQLException e) {
-            errmsg.setText("Error: " + e.getMessage());
-            errmsg.setVisible(true);
-            e.printStackTrace();
+            UsersDAO.insertUser(user);
+            return true;
+        }
+        User user = UsersDAO.findUser(userName);
+        if (user == null) {
+            UserHelper userHelper = new UserHelper();
+            user = userHelper.getUser(userName, pass, isTeacher);
+            if(user == null) {
+                return false;
+            }
+            UsersDAO.insertUser(user);
+            return true;
+        }
+        if(pass.equals(user.getPassword())) {
+            return true;
         }
         return false;
     }
@@ -101,7 +111,7 @@ public class HelloController implements Initializable {
         String userName = username1.getText();
         String pass = password1.getText();
         boolean isStudent = student1.isSelected();
-        boolean isTeacher = teacher1.isSelected();
+        int isTeacher = teacher1.isSelected() ? 1 : 0;
 
         if (userName.isEmpty() || pass.isEmpty() || (!student1.isSelected() && !teacher1.isSelected())) {
             errmsg.setText("You must enter a username, password, and select a status!");

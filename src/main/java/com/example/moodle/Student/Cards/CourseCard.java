@@ -17,7 +17,7 @@ public class CourseCard extends Pane {
             FXMLLoader loader = new FXMLLoader(CourseCard.class.getResource("/com/example/moodle/FXML/student_AvailableCourseCard_updated.fxml"));
             this.pane = loader.load();
             StudentAvailableCourseCardController cardController = loader.getController();
-            cardController.define(course.getCourseName(), course.getCourseDescription(), course.getNbChapters());
+            cardController.define(course.getFullname(), course.getSummary(), course.getNumsections());
             cardController.setCourse(course);
             getChildren().add(this.pane);
         } catch (IOException e) {

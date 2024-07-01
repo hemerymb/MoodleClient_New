@@ -1,64 +1,110 @@
+DROP DATABASE IF EXISTS moodleclient;
 CREATE DATABASE IF NOT EXISTS moodleclient;
 USE moodleclient;
 
-CREATE TABLE IF NOT EXISTS Users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    surname VARCHAR(255),
+DROP TABLE IF EXISTS user;
+CREATE TABLE IF NOT EXISTS user (
+    userid INT PRIMARY KEY,
     username VARCHAR(255),
     password VARCHAR(255),
-    email VARCHAR(255),
-    statut VARCHAR(255),
-    syncedbyte int default 0
+    token VARCHAR(255),
+    picture VARCHAR(255),
+    role INT
 );
 
-CREATE TABLE IF NOT EXISTS Course (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    courseName VARCHAR(255),
-    courseAbr VARCHAR(50),
-    courseDescription TEXT,
-    nbChapters INT,
-    nbAssignments INT,
-    teacherId INT,
-    FOREIGN KEY (teacherId) REFERENCES Users(id),
-    syncedbyte int default 0
+DROP TABLE IF EXISTS course;
+CREATE TABLE IF NOT EXISTS course (
+    courseid INT,
+    fullname VARCHAR(255),
+    shortname VARCHAR(50),
+    summary TEXT,
+    numsections INT,
+    startdate INT,
+    enddate INT,
+    created INT,
+    updated INT,
+    studentid INT,
+    teacherid INT,
+    PRIMARY KEY (courseid, studentid),
+    FOREIGN KEY (studentid) REFERENCES user(userid),
+    FOREIGN KEY (teacherid) REFERENCES user(userid)
 );
 
-CREATE TABLE IF NOT EXISTS Chapters (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255),
-    num INT,
-    content VARCHAR(255),
-    courseId INT,
-    FOREIGN KEY (courseId) REFERENCES Users(id),
-    syncedbyte int default 0
+DROP TABLE IF EXISTS section;
+CREATE TABLE IF NOT EXISTS section (
+    sectionid INT PRIMARY KEY,
+    sectionname VARCHAR(255),
+    courseid INT,
+    FOREIGN KEY (courseid) REFERENCES course(courseid)
 );
 
-CREATE TABLE IF NOT EXISTS assignments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    assignmentName VARCHAR(255) NOT NULL,
-    createdDate DATE NOT NULL,
-    limitedDate DATE NOT NULL,
-    courseName VARCHAR(255),
-    statut ENUM('in progress', 'finish') NOT NULL,
-    syncedbyte int default 0
+DROP TABLE IF EXISTS module;
+CREATE TABLE IF NOT EXISTS module (
+    cmid INT PRIMARY KEY,
+    sectionid INT,
+    name VARCHAR(255),
+    modname VARCHAR(255),
+    modplural VARCHAR(255),
+    downloadcontent INT,
+    FOREIGN KEY (sectionid) REFERENCES section(sectionid)
 );
+
+DROP TABLE IF EXISTS assignment;
+CREATE TABLE IF NOT EXISTS assignment (
+    assignmentid INT PRIMARY KEY,
+    moduleid INT,
+    assignmentname VARCHAR(255) NOT NULL,
+    created INT,
+    duedate INT,
+    attemptnumber INT,
+    FOREIGN KEY (moduleid) REFERENCES module(cmid)
+);
+
+DROP TABLE IF EXISTS private_files;
 CREATE TABLE IF NOT EXISTS private_files (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fileName VARCHAR(255) NOT NULL,
     fileSize BIGINT NOT NULL,
     fileType VARCHAR(50) NOT NULL,
-    filePath VARCHAR(255) NOT NULL,
-    syncedbyte int default 0
-);
-CREATE TABLE IF NOT EXISTS documents_files (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    fileName VARCHAR(255) NOT NULL,
-    fileSize BIGINT NOT NULL,
-    fileType VARCHAR(50) NOT NULL,
-    filePath VARCHAR(255) NOT NULL,
-    chapterId INT,
-    FOREIGN KEY (chapterId) REFERENCES Chapters(id)
-
+    filePath VARCHAR(255) NOT NULL
 );
 
+
+DROP TABLE IF EXISTS file;
+CREATE TABLE IF NOT EXISTS file (
+    fileid INT AUTO_INCREMENT PRIMARY KEY,
+    moduleid INT,
+    filename VARCHAR(255),
+    filepath VARCHAR(255),
+    filesize BIGINT,
+    fileurl VARCHAR(255),
+    created INT,
+    updated INT,
+    isexternalfile INT,
+    repositorytype VARCHAR(255),
+    mimetype VARCHAR(255),
+    FOREIGN KEY (moduleid) REFERENCES module(cmid)
+);
+
+DROP TABLE IF EXISTS submission;
+CREATE TABLE IF NOT EXISTS submission (
+    submissionid INT PRIMARY KEY,
+    assignmentid INT,
+    status VARCHAR(255),
+    created INT,
+    updated INT,
+    studentid INT,
+    FOREIGN KEY (assignmentid) REFERENCES assignment(assignmentid),
+    FOREIGN KEY (studentid) REFERENCES user(userid)
+);
+
+DROP TABLE IF EXISTS grade;
+CREATE TABLE IF NOT EXISTS grade (
+    gradeid INT AUTO_INCREMENT PRIMARY KEY,
+    submissionid INT,
+    grade INT,
+    grader INT,
+    comment VARCHAR(255),
+    FOREIGN KEY (submissionid) REFERENCES submission(submissionid),
+    FOREIGN KEY (grader) REFERENCES user(userid)
+);

@@ -68,7 +68,7 @@ public class CoursesPanelController implements Initializable {
     }
 
     private void addCourseToDatabase(String courseName) {
-        String query = "INSERT INTO course (courseName) VALUES (?)";
+        String query = "INSERT INTO course (fullname) VALUES (?)";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, courseName);
@@ -104,7 +104,7 @@ public class CoursesPanelController implements Initializable {
     }
 
     private boolean isCourseInDatabase(String courseName) {
-        String query = "SELECT COUNT(*) FROM course WHERE courseName = ?";
+        String query = "SELECT COUNT(*) FROM course WHERE fullname = ?";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, courseName);
@@ -119,7 +119,8 @@ public class CoursesPanelController implements Initializable {
     }
 
     private void loadCoursesFromDatabase() {
-        String query = "SELECT * FROM Course";
+        String query = "SELECT fullname FROM course";
+
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
@@ -134,6 +135,7 @@ public class CoursesPanelController implements Initializable {
                 );
 
                 addCourseCard(new CourseCard(course));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

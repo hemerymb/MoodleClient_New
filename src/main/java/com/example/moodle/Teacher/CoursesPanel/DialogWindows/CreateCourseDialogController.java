@@ -66,6 +66,20 @@ public class CreateCourseDialogController implements Initializable {
 
             root.setCenter(courses);
 
+//            CourseDAO.insertCourse(courseName, courseAbr, courseDescription, nbChapters, nbAssignments);
+//            System.out.println("Course created successfully.");
+//
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/AvailableCourseCard_updated.fxml"));
+//            Pane courseCard = loader.load();
+//
+//            AvailableCourseCardController controller = loader.getController();
+//            controller.setCourseDetails(courseName, courseDescription, nbChapters);
+//
+//            if (coursesPanelController != null) {
+//                coursesPanelController.addCourseCard(courseCard);
+//            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,67 +1,110 @@
 package com.example.moodle.Student.Entities;
 
 public class Course {
-    private int id;
-    private String courseName;
-    private String courseAbr;
-    private String courseDescription;
-    private int nbChapters;
-    private int nbAssignments;
+    private long courseid;
+    private String fullname;
+    private String shortname;
+    private String summary;
+    private int numsections;
+    private long startdate;
+    private long enddate;
+    private long updated;
+    private long studentid;
+    private long teacherid;
 
-    public Course(int id, String courseName, String courseAbr, String courseDescription, int nbChapters, int nbAssignments) {
-        this.id = id;
-        this.courseName = courseName;
-        this.courseAbr = courseAbr;
-        this.courseDescription = courseDescription;
-        this.nbChapters = nbChapters;
-        this.nbAssignments = nbAssignments;
+    public Course() {
     }
 
-    public int getId() {
-        return id;
+    public Course(long courseid, String fullname, String shortname, String summary, int numsections, long startdate, long enddate, long updated, long studentid, long teacherid) {
+        this.courseid = courseid;
+        this.fullname = fullname;
+        this.shortname = shortname;
+        this.summary = summary;
+        this.numsections = numsections;
+        this.startdate = startdate;
+        this.enddate = enddate;
+        this.updated = updated;
+        this.studentid = studentid;
+        this.teacherid = teacherid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public long getCourseid() {
+        return courseid;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public void setCourseid(long courseid) {
+        this.courseid = courseid;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public String getCourseAbr() {
-        return courseAbr;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public void setCourseAbr(String courseAbr) {
-        this.courseAbr = courseAbr;
+    public String getShortname() {
+        return shortname;
     }
 
-    public String getCourseDescription() {
-        return courseDescription;
+    public void setShortname(String shortname) {
+        this.shortname = shortname;
     }
 
-    public void setCourseDescription(String courseDescription) {
-        this.courseDescription = courseDescription;
+    public String getSummary() {
+        return summary;
     }
 
-    public int getNbChapters() {
-        return nbChapters;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
-    public void setNbChapters(int nbChapters) {
-        this.nbChapters = nbChapters;
+    public int getNumsections() {
+        return numsections;
     }
 
-    public int getNbAssignments() {
-        return nbAssignments;
+    public void setNumsections(int numsections) {
+        this.numsections = numsections;
     }
 
-    public void setNbAssignments(int nbAssignments) {
-        this.nbAssignments = nbAssignments;
+    public long getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(long startdate) {
+        this.startdate = startdate;
+    }
+
+    public long getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(long enddate) {
+        this.enddate = enddate;
+    }
+
+    public long getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(long updated) {
+        this.updated = updated;
+    }
+
+    public long getTeacherid() {
+        return teacherid;
+    }
+
+    public void setTeacherid(long teacherid) {
+        this.teacherid = teacherid;
+    }
+
+    public long getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(long studentid) {
+        this.studentid = studentid;
     }
 }

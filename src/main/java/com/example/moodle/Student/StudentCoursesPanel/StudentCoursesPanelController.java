@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.example.moodle.Student.Cards.CourseCard;
+import com.example.moodle.api.CourseHelper;
+import com.example.moodle.dao.CourseDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -38,7 +40,9 @@ public class StudentCoursesPanelController implements Initializable{
         gridpane.setHgap(10);
         gridpane.setVgap(10);
 
-        ArrayList<com.example.moodle.Student.Entities.Course> courses = getCourses();
+        CourseHelper courseHelper = new CourseHelper();
+
+        ArrayList<com.example.moodle.Student.Entities.Course> courses = courseHelper.getEnrolledCourses(2);
 //        courses.add(new Course("Architecture des ordinateurs", "Venez découvrir le concept de microcontrôleur et d'électronique", 3));
 //        courses.add(new Course("Réseaux mobiles et intelligents", "Ne voulez-vous pas savoir comment les réseaux de téléponie fonctionnent", 11));
 //        courses.add(new Course("Management", "Apprendre à se gérer et gérer les autres", 5));
@@ -54,28 +58,6 @@ public class StudentCoursesPanelController implements Initializable{
                 if(count == courses.size()) return;
             }
         }
-    }
-
-    public static ArrayList<com.example.moodle.Student.Entities.Course> getCourses() {
-        String query = "SELECT * FROM Course";
-        ArrayList<com.example.moodle.Student.Entities.Course> courses = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String courseName = resultSet.getString("courseName");
-                String courseAbr = resultSet.getString("courseAbr");
-                String courseDescription = resultSet.getString("courseDescription");
-                int nbChapters = resultSet.getInt("nbChapters");
-                int nbAssignments = resultSet.getInt("nbAssignments");
-                com.example.moodle.Student.Entities.Course course = new com.example.moodle.Student.Entities.Course(id, courseName, courseAbr,courseDescription, nbChapters, nbAssignments);
-                courses.add(course);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return courses;
     }
 
 }

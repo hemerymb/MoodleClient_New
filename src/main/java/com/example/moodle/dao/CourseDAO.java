@@ -1,6 +1,9 @@
 package com.example.moodle.dao;
 
+import com.example.moodle.Student.Entities.Course;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class CourseDAO {
 
@@ -8,14 +11,13 @@ public class CourseDAO {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
 
-
     public static void main(String[] args) {
         try {
             // Charger le driver JDBC
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Insérer un cours
-            insertCourse("Mathematics", "MATH101", "Basic Mathematics", 10, 5);
+            // insertCourse("Mathematics", "MATH101", "Basic Mathematics", 10, 5);
 
             // Lire tous les cours
             readCourses();
@@ -38,20 +40,66 @@ public class CourseDAO {
     }
 
     // Méthode pour insérer un cours
-    public static void insertCourse(String courseName, String courseAbr, String courseDescription, int nbChapters, int nbAssignments) {
-        String query = "INSERT INTO Course (courseName, courseAbr, courseDescription, nbChapters, nbAssignments) VALUES (?, ?, ?, ?, ?)";
+    public static void insertCourse(Course course) {
+        String query = "INSERT INTO course (courseid, fullname, shortname, summary, numsections, startdate, enddate, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, courseName);
-            statement.setString(2, courseAbr);
-            statement.setString(3, courseDescription);
-            statement.setInt(4, nbChapters);
-            statement.setInt(5, nbAssignments);
+            statement.setLong(1, course.getCourseid());
+            statement.setString(2, course.getFullname());
+            statement.setString(3, course.getShortname());
+            statement.setString(4, course.getSummary());
+            statement.setInt(5, course.getNumsections());
+            statement.setLong(6, course.getStartdate());
+            statement.setLong(7, course.getEnddate());
+            statement.setLong(6, course.getUpdated());
             statement.executeUpdate();
             System.out.println("Course inserted successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean isCourse(long id) {
+        Course course = null;
+        String query = "SELECT * FROM course WHERE courseid = ?";
+        try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static ArrayList<Course> getEnrolledCourses(long id) {
+        ArrayList<Course> courses = new ArrayList<>();
+        String query = "SELECT * FROM course WHERE studentid = ?";
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query);
+             ) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                Course course = new Course();
+                course.setCourseid(resultSet.getLong("id"));
+                course.setFullname(resultSet.getString("fullname"));
+                course.setShortname(resultSet.getString("shortname"));
+                course.setSummary(resultSet.getString("summary"));
+                course.setNumsections(resultSet.getInt("numsections"));
+                course.setStartdate(resultSet.getLong("startdate"));
+                course.setEnddate(resultSet.getLong("enddate"));
+                course.setUpdated(resultSet.getLong("updated"));
+
+                courses.add(course);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return courses;
     }
 
     // Méthode pour lire tous les cours
@@ -104,5 +152,8 @@ public class CourseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void insertCourse(String text, String text1, String text2, int nbChapters, int nbAssignments) {
     }
 }
