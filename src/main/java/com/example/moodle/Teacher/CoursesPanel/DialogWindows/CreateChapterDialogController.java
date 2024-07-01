@@ -6,7 +6,7 @@ import com.example.moodle.Teacher.CoursesPanel.CourseViewPanelController;
 import com.example.moodle.Teacher.CoursesPanel.CoursesPanelController;
 import com.example.moodle.Teacher.entity.Chapter;
 import com.example.moodle.Teacher.entity.Course;
-import com.example.moodle.dao.ChaptersDAO;
+import com.example.moodle.dao.SectionDAO;
 import com.example.moodle.dao.CourseDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,30 +50,30 @@ public class CreateChapterDialogController implements Initializable {
         }
 
         try {
-            ChaptersDAO.insertChapter(namefield.getText(), Integer.parseInt(numfield.getText()), "", course.getId());
-            course.setNbChapters(course.getNbChapters() + 1);
-            CourseDAO.updateCourse(course.getId(),course.getCourseName(), course.getCourseAbr(), course.getCourseDescription(), course.getNbChapters(), course.getNbAssignments());
-            System.out.println("Course created successfully.");
-
-            FXMLLoader coursVloader = new FXMLLoader(CreateChapterDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
-            AnchorPane coursV = coursVloader.load();
-
-            Label nameView = (Label) coursVloader.getNamespace().get("coursename");
-            TextArea descView = (TextArea) coursVloader.getNamespace().get("courseDescription");
-
-            nameView.setText(course.getCourseName()); descView.setText(course.getCourseDescription());
-
-            CourseViewPanelController CourVCtrler = coursVloader.getController();
-            CourVCtrler.course = course;
-            CourVCtrler.addChapterCard(new ChapterCard(new Chapter(
-                    CourVCtrler.getChaptersCount(),
-                    namefield.getText(),
-                    Integer.parseInt(numfield.getText()),
-                    "",
-                    course.getId()
-            )));
-
-            root.setCenter(coursV);
+//            SectionDAO.insertSection(namefield.getText(), Integer.parseInt(numfield.getText()), "", course.getId());
+//            course.setNbChapters(course.getNbChapters() + 1);
+//            CourseDAO.updateCourse(course.getId(),course.getCourseName(), course.getCourseAbr(), course.getCourseDescription(), course.getNbChapters(), course.getNbAssignments());
+//            System.out.println("Course created successfully.");
+//
+//            FXMLLoader coursVloader = new FXMLLoader(CreateChapterDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
+//            AnchorPane coursV = coursVloader.load();
+//
+//            Label nameView = (Label) coursVloader.getNamespace().get("coursename");
+//            TextArea descView = (TextArea) coursVloader.getNamespace().get("courseDescription");
+//
+//            nameView.setText(course.getCourseName()); descView.setText(course.getCourseDescription());
+//
+//            CourseViewPanelController CourVCtrler = coursVloader.getController();
+//            CourVCtrler.course = course;
+//            CourVCtrler.addChapterCard(new ChapterCard(new Chapter(
+//                    CourVCtrler.getChaptersCount(),
+//                    namefield.getText(),
+//                    Integer.parseInt(numfield.getText()),
+//                    "",
+//                    course.getId()
+//            )));
+//
+//            root.setCenter(coursV);
 
         } catch (Exception e) {
             e.printStackTrace();
