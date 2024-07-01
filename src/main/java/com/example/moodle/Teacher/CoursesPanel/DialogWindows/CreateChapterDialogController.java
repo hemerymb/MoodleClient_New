@@ -54,10 +54,16 @@ public class CreateChapterDialogController implements Initializable {
             CourseDAO.updateCourse(currentCourse.getId(),currentCourse.getCourseName(), currentCourse.getCourseAbr(), currentCourse.getCourseDescription(), currentCourse.getNbChapters(), currentCourse.getNbAssignments());
             System.out.println("Course created successfully.");
 
+            FXMLLoader chapL = new FXMLLoader(CreateChapterDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_ChaptersSection.fxml"));
+            AnchorPane chapV = chapL.load();
+
             FXMLLoader coursVloader = new FXMLLoader(CreateChapterDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
             AnchorPane coursV = coursVloader.load();
 
+            CourseViewPanelController coursVPC = coursVloader.getController();
+
             root.setCenter(coursV);
+            coursVPC.setOnCenter(chapV);
 
         } catch (Exception e) {
             e.printStackTrace();

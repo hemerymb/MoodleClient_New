@@ -32,7 +32,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static com.example.moodle.HelloApplication.stage;
 import static com.example.moodle.moodleclient.Moodleclient.currentCourse;
+import static com.example.moodle.moodleclient.Moodleclient.root;
 
 
 public class ChapterCardController implements Initializable {
@@ -102,7 +104,7 @@ public class ChapterCardController implements Initializable {
     }
 
     @FXML
-    void deleteChapter(MouseEvent event) {
+    void deleteChapter(MouseEvent event) throws IOException {
 
         try (Connection conn = connect();
              PreparedStatement statement = conn.prepareStatement("DELETE FROM documents_files WHERE chapterId = ?")) {
@@ -124,6 +126,17 @@ public class ChapterCardController implements Initializable {
 
         currentCourse.setNbChapters(currentCourse.getNbChapters() - 1);
         CourseDAO.updateCourse(currentCourse.getId(), currentCourse.getCourseName(), currentCourse.getCourseAbr(), currentCourse.getCourseDescription(), currentCourse.getNbChapters(), currentCourse.getNbAssignments());
+
+        FXMLLoader chapL = new FXMLLoader(CreateChapterDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_ChaptersSection.fxml"));
+        AnchorPane chapV = chapL.load();
+
+        FXMLLoader coursVloader = new FXMLLoader(CreateChapterDialogController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_updated.fxml"));
+        AnchorPane coursV = coursVloader.load();
+
+        CourseViewPanelController coursVPC = coursVloader.getController();
+
+        root.setCenter(coursV);
+        coursVPC.setOnCenter(chapV);
 
     }
 
@@ -172,10 +185,18 @@ public class ChapterCardController implements Initializable {
 
     private String readableFileSize(long size) {
         if (size <= 0) return "0 B";
-        final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
-        int digitGroups = (int) (Math.log10(size) / Math.log(1024));
-        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+
+        final String[] units = new String[] { "B", "KB", "MB", "GB", "TB" };
+        int unitIndex = 0;
+
+        while (size >= 1024 && unitIndex < units.length - 1) {
+            size /= 1024;
+            unitIndex++;
+        }
+
+        return String.format("%.1f %s", (double) size, units[unitIndex]);
     }
+
 
     public void define(String name, String num, int nbfichiers, Chapter chap) {
         this.chapterName.setText(name);

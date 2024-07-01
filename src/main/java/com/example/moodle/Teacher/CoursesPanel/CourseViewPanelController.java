@@ -20,6 +20,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -40,10 +41,10 @@ import static com.example.moodle.moodleclient.Moodleclient.root;
 public class CourseViewPanelController implements Initializable {
 
     @FXML
-    private Button AssignmentsBtn;
+    private BorderPane ViewBorderPane;
 
     @FXML
-    private VBox ChaptersVbox;
+    private Button AssignmentsBtn;
 
     @FXML
     private Button ChaptersBtn;
@@ -67,77 +68,46 @@ public class CourseViewPanelController implements Initializable {
     private Label deleteCourse;
 
     @FXML
-    private GridPane gridpane;
-
-    @FXML
     private Label returnArrow;
 
     @FXML
     private VBox leftbtnMenu;
 
     @FXML
-    private Button newChapBtn;
-
-    @FXML
     private ScrollPane scrollpane;
-
-    @FXML
-    private Text chaptersTitle;
-
-    public static List<ChapterCard> Chapterslist;
-
-    private Connection connect() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/moodleclient";
-        String user = "root";
-        String password = "681503533";
-        return DriverManager.getConnection(url, user, password);
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         coursename.setText(currentCourse.getCourseName());
         courseDescription.setText(currentCourse.getCourseDescription());
-
-        Chapterslist = new ArrayList<>();
-        ChaptersVbox.getChildren().clear();
-        hideAll();
     }
 
     @FXML
     void handleAssignmentsBtn(ActionEvent event) {
-        ChaptersVbox.setVisible(false);
         selectBtn(leftbtnMenu, AssignmentsBtn);
-        ChaptersVbox.getChildren().clear();
 
     }
 
     @FXML
-    void handleChaptersBtn(ActionEvent event) {
+    void handleChaptersBtn(ActionEvent event) throws IOException {
         selectBtn(leftbtnMenu, ChaptersBtn);
-        chaptersTitle.setVisible(true);
-        ChaptersVbox.setVisible(true);
-        newChapBtn.setVisible(true);
-        newChapBtn.setDisable(false);
-        ChaptersVbox.getChildren().clear();
-        Chapterslist.clear();
 
-        loadChaptersFromDatabase();
+        FXMLLoader loader = new FXMLLoader(CourseViewPanelController.class.getResource("/com/example/moodle/FXML/CourseViewPanel_ChaptersSection.fxml"));
+        AnchorPane chapV = loader.load();
+
+        ViewBorderPane.setCenter(chapV);
 
     }
 
     @FXML
     void handleCourseFilesBtn(ActionEvent event) {
-        ChaptersVbox.setVisible(false);
         selectBtn(leftbtnMenu, CourseFilesBtn);
-        ChaptersVbox.getChildren().clear();
 
     }
 
     @FXML
     void handleParticipantsBtn(ActionEvent event) {
-        ChaptersVbox.setVisible(false);
         selectBtn(leftbtnMenu, ParticipantsBtn);
-        ChaptersVbox.getChildren().clear();
 
     }
 
@@ -174,57 +144,6 @@ public class CourseViewPanelController implements Initializable {
         }
     }
 
-    @FXML
-    void handleCreateChapter(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/moodle/FXML/CreateChapterDialog.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void addChapterCard(ChapterCard chap){
-
-        Chapterslist.add(chap);
-        ChaptersVbox.getChildren().clear();
-
-        for (ChapterCard ch : Chapterslist){
-            ChaptersVbox.getChildren().add(ch);
-        }
-    }
-
-    public void loadChaptersFromDatabase() {
-        String query = "SELECT * FROM chapters WHERE courseId = '" + currentCourse.getId() + "'";
-        try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
-            while (rs.next()) {
-
-                Chapter chap = new Chapter(
-                        rs.getInt("id"),
-                        rs.getString("title"),
-                        rs.getInt("num"),
-                        rs.getString("content"),
-                        rs.getInt("courseId")
-                );
-
-                ChaptersVbox.getChildren().clear();
-                addChapterCard(new ChapterCard(chap));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     void selectBtn(VBox VB, Button button) {
         button.getStyleClass().add("focused");
         for (Node node : VB.getChildren()) {
@@ -237,14 +156,7 @@ public class CourseViewPanelController implements Initializable {
         }
     }
 
-    public int getChaptersCount() {
-        return Chapterslist.size();
-    }
-
-    void hideAll() {
-        ChaptersVbox.setVisible(false);
-        chaptersTitle.setVisible(false);
-        newChapBtn.setVisible(false);
-        newChapBtn.setDisable(true);
+    public void setOnCenter(AnchorPane pane) {
+        ViewBorderPane.setCenter(pane);
     }
 }
