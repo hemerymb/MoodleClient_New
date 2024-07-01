@@ -14,13 +14,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-
 import static com.example.moodle.moodleclient.Moodleclient.root;
 
-
-import javafx.scene.layout.AnchorPane;
-import static com.example.moodle.moodleclient.Moodleclient.root;
 public class AvailableCourseCardController implements Initializable{
+    @FXML
+    private Label ChaptersNumber;
 
     @FXML
     private Label courseDesc;
@@ -28,23 +26,12 @@ public class AvailableCourseCardController implements Initializable{
     @FXML
     private Label courseName;
 
-    @FXML
-    private Label ChaptersNumber;
-
     private Course cours;
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
-    @FXML
-    void handleCourse(MouseEvent event) {
-        System.out.println("Yo");
-
-    }
-
-
 
     @FXML
     void handleCourseView(MouseEvent event) throws IOException {
@@ -70,6 +57,4 @@ public class AvailableCourseCardController implements Initializable{
         this.ChaptersNumber.setStyle("-fx-text-fill: black");
         this.cours = cours;
     }
-
 }
-
